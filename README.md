@@ -45,3 +45,7 @@ http://mirrors.aliyun.com/pypi/simple/
 http://pypi.douban.com/simple
 
 https://pypi.mirrors.ustc.edu.cn/simple/
+
+# 在服务器上git clone github项目的过程
+
+https://blog.csdn.net/a61022706/article/details/122228080
