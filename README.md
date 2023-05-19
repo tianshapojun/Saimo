@@ -40,9 +40,9 @@ https://mirrors.bfsu.edu.cn/anaconda/pkgs/main/
 
 https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/linux-64/
 
-http://mirrors.aliyun.com/pypi/simple/
+https://mirrors.aliyun.com/pypi/simple/
 
-http://pypi.douban.com/simple
+https://pypi.douban.com/simple
 
 https://pypi.mirrors.ustc.edu.cn/simple/
 
