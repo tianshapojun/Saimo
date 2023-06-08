@@ -23,6 +23,14 @@ conda deactivate
 第二步：删除环境
 conda remove -n  需要删除的环境名 --all
 
+# Anaconda 复制环境
+#环境复制命令：
+conda create -n traget_env_name --clone source_env_name
+
+举例：
+conda create -n my_numpy --clone numpy 
+(创建一个新的环境my_numpy，由numpy复制而来)
+
 # Anaconda镜像源
 1.添加镜像channel。
 
