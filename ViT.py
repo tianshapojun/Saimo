@@ -1,4 +1,5 @@
 import torch
+import torch
 import torch.nn.functional as F
 from einops import rearrange, repeat
 from torch import nn
@@ -6,25 +7,20 @@ from torch import nn
 MIN_NUM_PATCHES = 16
 # https://blog.csdn.net/black_shuang/article/details/95384597
 
+class TensorDataset(Dataset):
+    # TensorData继承Dataset，重载了__init__, __getitem__,__lem__
+    def __init__(self, data_tensor, target_tensor):
+        # 实现将一组Tensor数据对封装成Tensor数据集
+        self.data_tensor = data_tensor
+        self.target_tensor = target_tensor
 
-class Residual(nn.Module):
-    def __init__(self, fn):
-        super().__init__()
-        self.fn = fn
+    def __getitem__(self, index):
+        # 能够通过index得到数据集的数据
+        return self.data_tensor[index], self.target_tensor[index]
 
-    def forward(self, x, **kwargs):
-        return self.fn(x, **kwargs) + x
-
-
-class PreNorm(nn.Module):
-    def __init__(self, dim, fn):
-        super().__init__()
-        self.norm = nn.LayerNorm(dim)
-        self.fn = fn
-
-    def forward(self, x, **kwargs):
-        return self.fn(self.norm(x), **kwargs)
-
+    def __len__(self):
+        # 能够通过len，得到数据集大小
+        return self.data_tensor.size(0)  # size(0)返回当前张量维数的第一维
 
 class FeedForward(nn.Module):
     def __init__(self, dim, hidden_dim, dropout=0.):
@@ -36,9 +32,10 @@ class FeedForward(nn.Module):
             nn.Linear(hidden_dim, dim),
             nn.Dropout(dropout)
         )
+        self.norm = nn.LayerNorm(dim)
 
     def forward(self, x):
-        return self.net(x)
+        return x + self.net(self.norm(x))
 
 
 class Attention(nn.Module):
@@ -53,12 +50,13 @@ class Attention(nn.Module):
             nn.Linear(inner_dim, dim),
             nn.Dropout(dropout)
         )
+        self.norm = nn.LayerNorm(dim)
 
     def forward(self, x, mask=None):
         # x : b n (h d)
         # x shape: 1, 65, 1024
         b, n, _, h = *x.shape, self.heads
-        qkv = self.to_qkv(x).chunk(3, dim=-1)  # dim=1024 -> innerdim x 3
+        qkv = self.to_qkv(self.norm(x)).chunk(3, dim=-1)  # dim=1024 -> innerdim x 3
         # q/k/v shape: 1, 65, 1024
         q, k, v = map(lambda t: rearrange(
             t, 'b n (h d) -> b h n d', h=h), qkv)  # inner dim = (heads x dim)
@@ -83,7 +81,7 @@ class Attention(nn.Module):
         # batch, heads, inner dim, dim
         out = rearrange(out, 'b h n d -> b n (h d)')
         out = self.to_out(out)  # inner dim->dim 的linear
-        return out  # shape: 1, 65, 1024
+        return x + out  # shape: 1, 65, 1024
 
 
 class Transformer(nn.Module):
@@ -92,10 +90,8 @@ class Transformer(nn.Module):
         self.layers = nn.ModuleList([])
         for _ in range(depth):
             self.layers.append(nn.ModuleList([
-                Residual(PreNorm(dim, Attention(dim, heads=heads,
-                                                dim_head=dim_head, dropout=dropout))),
-                Residual(PreNorm(dim, FeedForward(
-                    dim, mlp_dim, dropout=dropout)))
+                Attention(dim, heads=heads,dim_head=dim_head, dropout=dropout),
+                FeedForward(dim, mlp_dim, dropout=dropout)
             ]))
 
     def forward(self, x, mask=None):
@@ -153,7 +149,7 @@ class ViT(nn.Module):
         x = self.transformer(x, mask)
 
         x = self.to_cls_token(x[:, 0])
-        return self.mlp_head(x)
+        return self.mlp_head(x).softmax(dim=-1)
 
 
 if __name__ == "__main__":
@@ -169,7 +165,10 @@ if __name__ == "__main__":
         emb_dropout=0.1
     )
 
-    img = torch.randn(1, 3, 256, 256)
+    img = torch.randn(1024, 3, 256, 256)
+    label = torch.randint(high=1000,size=1024)
+    dataset = TensorDataset(img,label)
+    dataloader = torch.utils.data.DataLoader(my_trainset,batch_size=16)
 
     # optional mask, designating which patch to attend to
     mask = torch.ones(1, 8, 8).bool()
