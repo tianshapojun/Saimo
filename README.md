@@ -57,3 +57,20 @@ https://pypi.mirrors.ustc.edu.cn/simple/
 # 在服务器上git clone github项目的过程
 
 https://blog.csdn.net/a61022706/article/details/122228080
+
+# 服务器运行Tensorboard本地查看的方法
+服务器终端中输入
+
+$ tensorboard --logdir=./runs
+
+本地终端中输入：
+
+ssh -L 16006:127.0.0.1:6006 user@sevcerip 
+
+16006:本地端口号;\
+127.0.0.1:本地ip;\
+6006:服务器端口号;
+
+浏览器输入
+
+http://127.0.0.1:16006/
