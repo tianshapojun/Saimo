@@ -8,6 +8,8 @@ import torchvision
 import torch.distributed as dist
 from torch.nn.parallel import DistributedDataParallel as DDP
 import os
+from torch.utils.tensorboard import SummaryWriter
+writer = SummaryWriter('./cache')
 import logging
 #logging.basicConfig(level=logging.INFO)
 
@@ -203,14 +205,19 @@ if __name__ == "__main__":
     iterator = tqdm(range(500))
     for epoch in iterator:
         trainloader.sampler.set_epoch(epoch)
+        total_loss = 0
         for data, label in trainloader:
             data, label = data.to(local_rank), label.to(local_rank)
             optimizer.zero_grad()
             prediction = model(data)
             loss = loss_func(prediction, label)
+            total_loss += loss.item()
             loss.backward()
             iterator.desc = "loss = %0.3f" % loss
             optimizer.step()
+        writer.add_scalar("TotalLoss", total_loss, epoch)
+    
+    writer.close()
     """
     optional mask, designating which patch to attend to
     mask = torch.ones(1, 8, 8).bool()
