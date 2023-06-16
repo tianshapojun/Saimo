@@ -4,6 +4,10 @@ from einops import rearrange, repeat
 from torch import nn
 from torch.utils.data import Dataset,DataLoader
 from tqdm import tqdm
+import torchvision
+import torch.distributed as dist
+from torch.nn.parallel import DistributedDataParallel as DDP
+import os
 
 MIN_NUM_PATCHES = 16
 # https://blog.csdn.net/black_shuang/article/details/95384597
@@ -150,33 +154,53 @@ class ViT(nn.Module):
         x = self.transformer(x, mask)
 
         x = self.to_cls_token(x[:, 0])
-        return self.mlp_head(x).softmax(dim=-1)
+        return self.mlp_head(x)
 
 
 if __name__ == "__main__":
-    local_rank = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    ddp = True
+    dist.init_process_group(backend='nccl') 
+    local_rank = int(os.environ["LOCAL_RANK"])
+    torch.cuda.set_device(local_rank)
     model = ViT(
-        image_size=256,
-        patch_size=32,
-        num_classes=1000,
-        dim=1024,
-        depth=6,
-        heads=16,
-        mlp_dim=2048,
-        dropout=0.1,
-        emb_dropout=0.1
+        image_size=32,
+        patch_size=4,
+        num_classes=10,
+        dim=512,
+        depth=3,
+        heads=4,
+        mlp_dim=1024,
+        dropout=0,
+        emb_dropout=0
     ).to(local_rank)
-
+    model = DDP(model, device_ids=[local_rank], output_device=local_rank)
+    """
     img = torch.randn(1024, 3, 256, 256)
     label = torch.randint(high=1000,size=(1024,))
     dataset = TensorDataset(img,label)
     dataloader = DataLoader(dataset,batch_size=16)
+    """
+    transform = torchvision.transforms.Compose([
+        torchvision.transforms.ToTensor(),
+        torchvision.transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
+    ])
+    my_trainset = torchvision.datasets.CIFAR10(root='./data', train=True, 
+        download=True, transform=transform)
+    if ddp == True:
+        train_sampler = torch.utils.data.distributed.DistributedSampler(my_trainset)
+        trainloader = torch.utils.data.DataLoader(my_trainset,batch_size=32, num_workers=2, sampler=train_sampler)
+    else:
+        trainloader = torch.utils.data.DataLoader(my_trainset,batch_size=32, num_workers=2)
+        
+    print('Data set')
     
     optimizer = torch.optim.SGD(model.parameters(), lr=0.001)
     loss_func = nn.CrossEntropyLoss().to(local_rank)
     
-    iterator = tqdm(range(100))
+    model.train()
+    iterator = tqdm(range(500))
     for epoch in iterator:
+        trainloader.sampler.set_epoch(epoch)
         for data, label in trainloader:
             data, label = data.to(local_rank), label.to(local_rank)
             optimizer.zero_grad()
@@ -185,8 +209,9 @@ if __name__ == "__main__":
             loss.backward()
             iterator.desc = "loss = %0.3f" % loss
             optimizer.step()
-    
-    # optional mask, designating which patch to attend to
-    #mask = torch.ones(1, 8, 8).bool()
-    #preds = model(img, mask=mask)  # (1, 1000)
-    #print(preds.shape)
+    """
+    optional mask, designating which patch to attend to
+    mask = torch.ones(1, 8, 8).bool()
+    preds = model(img, mask=mask)  # (1, 1000)
+    print(preds.shape)
+    """
