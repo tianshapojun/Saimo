@@ -8,6 +8,8 @@ import torchvision
 import torch.distributed as dist
 from torch.nn.parallel import DistributedDataParallel as DDP
 import os
+import logging
+#logging.basicConfig(level=logging.INFO)
 
 MIN_NUM_PATCHES = 16
 # https://blog.csdn.net/black_shuang/article/details/95384597
@@ -174,6 +176,7 @@ if __name__ == "__main__":
         emb_dropout=0
     ).to(local_rank)
     model = DDP(model, device_ids=[local_rank], output_device=local_rank)
+    logging.warning('DDP model initialization completed')
     """
     img = torch.randn(1024, 3, 256, 256)
     label = torch.randint(high=1000,size=(1024,))
@@ -191,8 +194,7 @@ if __name__ == "__main__":
         trainloader = torch.utils.data.DataLoader(my_trainset,batch_size=32, num_workers=2, sampler=train_sampler)
     else:
         trainloader = torch.utils.data.DataLoader(my_trainset,batch_size=32, num_workers=2)
-        
-    print('Data set')
+    logging.warning('Data process completed')
     
     optimizer = torch.optim.SGD(model.parameters(), lr=0.001)
     loss_func = nn.CrossEntropyLoss().to(local_rank)
