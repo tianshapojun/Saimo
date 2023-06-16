@@ -1,8 +1,9 @@
 import torch
-import torch
 import torch.nn.functional as F
 from einops import rearrange, repeat
 from torch import nn
+from torch.utils.data import Dataset,DataLoader
+from tqdm import tqdm
 
 MIN_NUM_PATCHES = 16
 # https://blog.csdn.net/black_shuang/article/details/95384597
@@ -153,7 +154,8 @@ class ViT(nn.Module):
 
 
 if __name__ == "__main__":
-    v = ViT(
+    local_rank = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    model = ViT(
         image_size=256,
         patch_size=32,
         num_classes=1000,
@@ -163,16 +165,28 @@ if __name__ == "__main__":
         mlp_dim=2048,
         dropout=0.1,
         emb_dropout=0.1
-    )
+    ).to(local_rank)
 
     img = torch.randn(1024, 3, 256, 256)
-    label = torch.randint(high=1000,size=1024)
+    label = torch.randint(high=1000,size=(1024,))
     dataset = TensorDataset(img,label)
-    dataloader = torch.utils.data.DataLoader(my_trainset,batch_size=16)
-
+    dataloader = DataLoader(dataset,batch_size=16)
+    
+    optimizer = torch.optim.SGD(model.parameters(), lr=0.001)
+    loss_func = nn.CrossEntropyLoss().to(local_rank)
+    
+    iterator = tqdm(range(100))
+    for epoch in iterator:
+        for data, label in trainloader:
+            data, label = data.to(local_rank), label.to(local_rank)
+            optimizer.zero_grad()
+            prediction = model(data)
+            loss = loss_func(prediction, label)
+            loss.backward()
+            iterator.desc = "loss = %0.3f" % loss
+            optimizer.step()
+    
     # optional mask, designating which patch to attend to
-    mask = torch.ones(1, 8, 8).bool()
-
-    preds = v(img, mask=mask)  # (1, 1000)
-
-    print(preds.shape)
+    #mask = torch.ones(1, 8, 8).bool()
+    #preds = model(img, mask=mask)  # (1, 1000)
+    #print(preds.shape)
