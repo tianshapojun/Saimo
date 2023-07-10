@@ -74,3 +74,18 @@ ssh -L 16006:127.0.0.1:6006 user@sevcerip
 浏览器输入
 
 http://127.0.0.1:16006/
+
+# Python 添加并存储logger
+
+logger = logging.getLogger(\_\_name\_\_) \
+logger.setLevel(level = logging.INFO) \
+current_date = datetime.now().strftime('%Y%m%d%H%M%S') \
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s') \
+handler = logging.FileHandler("/content/gdrive/MyDrive/Models/STFGNN/"+str(current_date)+"_log.txt") \
+handler.setLevel(logging.INFO) \
+handler.setFormatter(formatter) \
+sh = logging.StreamHandler() \
+sh.setLevel(logging.INFO) \
+sh.setFormatter(formatter) \
+logger.addHandler(handler) \
+logger.addHandler(sh)
