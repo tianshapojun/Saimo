@@ -89,3 +89,7 @@ sh.setLevel(logging.INFO) \
 sh.setFormatter(formatter) \
 logger.addHandler(handler) \
 logger.addHandler(sh)
+
+# Python pip 错误：OSError: Could not find a suitable TLS CA certificate bundle, invalid path: /etc/ssl/certs/ca-certificates.crt
+
+sudo update-ca-certificates to create it.
