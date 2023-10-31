@@ -124,3 +124,7 @@ sudo update-ca-certificates
 - 按SHIFIT + ALT，再使用鼠标拖动，也可以出现竖直的列光标，同时可以选中多列；
 - 选中文本后，CTRL + [ 和 CTRL + ] 可实现文本的向左移动 和 向右移动； 
 - CTRL + SHIFIT + L 选中编辑代码中相同的内容； 
+
+# Cannot access waymo_open_dataset_motion_v_1_1_0
+
+Could you try registering (or re-registering) at https://waymo.com/open/licensing/ This process should grant you access to the dataset files.
