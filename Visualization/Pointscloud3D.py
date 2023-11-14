@@ -131,23 +131,6 @@ if __name__== "__main__":
         bbox = json.loads(f.read())
     points = boxes_to_corners_3d(np.array(bbox['bboxes_3d']))
     print(points.shape)
-    
-    
-    x1, y1, z1 = (0, 1, 1)  # | => pt1
-    x2, y2, z2 = (1, 1, 1)  # | => pt2
-    x3, y3, z3 = (0, 0, 1)  # | => pt3
-    x4, y4, z4 = (1, 0, 1)  # | => pt4
-    x5, y5, z5 = (0, 1, 0)  # | => pt5
-    x6, y6, z6 = (1, 1, 0)  # | => pt6
-    x7, y7, z7 = (0, 0, 0)  # | => pt7
-    x8, y8, z8 = (1, 0, 0)  # | => pt8
-
-
-    box_points = np.array([[[x6, y6, z6], [x8, y8, z8], [x7, y7, z7],
-                            [x5, y5, z5], [x2, y2, z2], [x4, y4, z4],
-                            [x3, y3, z3], [x1, y1, z1]]])
 
     draw_gt_boxes3d(points,fig)
-
-
     mlab.show()
