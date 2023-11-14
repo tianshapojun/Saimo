@@ -1,4 +1,5 @@
-#read bin file, https://zhuanlan.zhihu.com/p/371254250
+### read bin file, https://zhuanlan.zhihu.com/p/371254250
+### mayavi, pip install https://github.com/enthought/mayavi/zipball/master
 import numpy as np
 import mayavi.mlab as mlab
 import torch
