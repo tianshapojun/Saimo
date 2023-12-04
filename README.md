@@ -95,6 +95,7 @@ logger.addHandler(sh)
 sudo update-ca-certificates
 
 # Python Pytorch Torchvision
+https://pytorch.org/get-started/locally/
 
 | `torch`            | `torchvision`      | Python              |
 | ------------------ | ------------------ | ------------------- |
