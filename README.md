@@ -2,6 +2,11 @@
 
 https://pytorch.org/get-started/previous-versions/
 
+# conda取消自动进入base环境
+取消进base: conda config --set auto_activate_base false
+
+重新进base: conda config --set auto_activate_base true
+
 # Anaconda删除虚拟环境
 方法一：
 
@@ -13,6 +18,7 @@ conda env list
  
 第三步：删除环境
 conda env remove -p 要删除的虚拟环境路径
+
 conda env remove -p /home/kuucoss/anaconda3/envs/tfpy36   #我的例子
 
 方法二：
