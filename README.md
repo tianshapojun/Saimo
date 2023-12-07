@@ -1,3 +1,10 @@
+# Linux之显示文件或目录所占用的磁盘空间
+du -sh ./* 显示当前目录下所有文件的大小
+
+-s 显示文件或整个目录的大小，默认单位为KB
+
+-h输出文件系统分区使用情况，例如：1KB、1MB、1GB
+
 # Pytorch各版本
 
 https://pytorch.org/get-started/previous-versions/
