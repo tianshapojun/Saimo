@@ -142,3 +142,8 @@ https://pytorch.org/get-started/locally/
 # Cannot access waymo_open_dataset_motion_v_1_1_0
 
 Could you try registering (or re-registering) at https://waymo.com/open/licensing/ This process should grant you access to the dataset files.
+
+# Calculate the number of parameters 
+total = sum([param.nelement() for param in model.parameters()])
+
+print("Number of parameter: %.2fM" % (total/1e6))
