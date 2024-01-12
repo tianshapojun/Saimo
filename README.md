@@ -143,7 +143,18 @@ https://pytorch.org/get-started/locally/
 
 Could you try registering (or re-registering) at https://waymo.com/open/licensing/ This process should grant you access to the dataset files.
 
-# Calculate the number of parameters 
+# Torch Tricks
+## Calculate the number of parameters 
 total = sum([param.nelement() for param in model.parameters()])
 
 print("Number of parameter: %.2fM" % (total/1e6))
+
+## 特定GPU可见
+1.CUDA_VISIBLE_DEVICES='1' python train.py
+
+2.in .py file
+
+import os
+
+os.environ['CUDA_VISIBLE_DEVICES'] = '1,2,3'(在import torch 之前)
+
