@@ -149,6 +149,10 @@ total = sum([param.nelement() for param in model.parameters()])
 
 print("Number of parameter: %.2fM" % (total/1e6))
 
+## pip install mayavi fails building wheel
+from https://github.com/enthought/mayavi/issues/1232
+pip install https://github.com/enthought/mayavi/zipball/master
+
 ## 特定GPU可见
 1.CUDA_VISIBLE_DEVICES='1' python train.py
 
