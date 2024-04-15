@@ -185,3 +185,9 @@ def seed_torch(seed=1029):
 	torch.backends.cudnn.deterministic = True
 
 seed_torch()
+
+## pytorch 显存分配及模型推理时间统计
+
+显存分配：https://zhuanlan.zhihu.com/p/527143823?utm_id=0
+
+推理速度计算：https://zhuanlan.zhihu.com/p/376925457
