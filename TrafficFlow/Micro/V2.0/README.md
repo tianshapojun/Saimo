@@ -3,7 +3,7 @@
 <img src="https://github.com/tianshapojun/Saimo/assets/10208337/b5e46deb-4515-4847-9d87-793936ea60b3" width="750px">
 </div>
 
-前处理修改部分：
+## 1.1 前处理修改部分：
 1. 光栅化包围盒，增加两通道(中心为车辆中心，长宽为1，颜色=速度*255/120)；
 2. 光栅化地图，为了对应主车非0航向角，参数设置更新为：\
     "raster_size_pre": [256,256], \
@@ -14,6 +14,13 @@
     "ego_center_post": [0.25,0.5], #\
 3. 光栅化地图，增加停止线/当前车道中心线(独占1通道，待评估是否需要加入下一条车道中心线)；
 4. 矢量化特征部分：增加速度、航向角、车辆类型；
+
+## 1.2 训练损失
+
+(左) 第二次优化；(右) 第三次优化；
+
+<img src="https://github.com/tianshapojun/Saimo/assets/10208337/10c05702-48b7-4b4c-98ed-256838362657" width="500px">
+<img src="https://github.com/tianshapojun/Saimo/assets/10208337/74626ec4-2e42-4493-b240-c0a5e52bfe48" width="500px">
 
 # 2. 效果展示
 地图：cd_light.xodr，无后处理效果；
