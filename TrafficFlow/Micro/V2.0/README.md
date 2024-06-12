@@ -41,6 +41,12 @@
 <img src="https://github.com/tianshapojun/Saimo/assets/10208337/99399a54-ecb4-472c-ad53-90fc459f379f" width="600px">
 </div>
 
+(左) 转弯成功的特征；(右) 转弯失败的特征；
+
+<img src="https://github.com/tianshapojun/Saimo/assets/10208337/c63d24ee-ac46-4a33-b330-0ebf4ffff197" width="500px">
+<img src="https://github.com/tianshapojun/Saimo/assets/10208337/3b3f82a1-5f40-4563-878d-ce2d5fa955d2" width="500px">
+
+
 ## 3.2 在弯道冲出车道
 地图: test.xodr,
 
