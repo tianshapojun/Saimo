@@ -1,5 +1,5 @@
 # 0. 总结
-在cd_light./test/多种车道类型.xodr三张地图上进行测试，
+在cd_light/多种车道类型/test.xodr三张地图上进行测试，在前两张地图上表现差别不大，但是在第三张地图test.xodr上2通道模型在直行-拐弯处冲出车道。
 
 # 1. 模型训练相关配置
 为简化表达，4通道模型记为M1，2通道模型几位M2，除通道数外，两者的差别为：
@@ -15,6 +15,7 @@ M1：Epoch 27, MAE: 0.03, RMSE: 0.07, MAPE: 7.6809%；
 M2：Epoch 27, MAE: 0.04, RMSE: 0.07, MAPE: 8.1874%；
 
 # 2. 相关效果比较
+给定seed = 1028。
 ## 2.1 测试地图：cd_light.xodr
 
 <img src="https://github.com/tianshapojun/Saimo/assets/10208337/0ef8e2f3-6ae6-4f53-81a0-67f157095e30" width="500px">
