@@ -5,12 +5,18 @@ $L_{total} = (1.0 - \lambda_{dssim}) * L_{l1} + \lambda_{dssim} * (1.0 - ssim(im
 
 # 2. 效果展示
 ## 2.1 总体效果
-视频分上中下三行:
+彩色图，视频分上中下三部分:
 - 第一行为ground truth
 - 第二行为baseline还原效果
 - 第三行为混合建模还原效果
 
 https://github.com/tianshapojun/Saimo/assets/10208337/4216c7aa-c5b9-4c69-b6dc-8287af20cfe1
+
+深度图，视频分为上下两部分：
+- 第一行为baseline深度图
+- 第二行为混合建模深度图
+
+https://github.com/tianshapojun/Saimo/assets/10208337/4ff816fd-4f7a-42a3-b343-302474c46f29
 
 ## 2.2 静态/动态效果
 现象：
