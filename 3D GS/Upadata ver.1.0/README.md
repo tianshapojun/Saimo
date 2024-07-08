@@ -28,4 +28,15 @@ https://github.com/tianshapojun/Saimo/assets/10208337/94060d0e-4db2-46d7-a3d8-7a
 https://github.com/tianshapojun/Saimo/assets/10208337/61c5135d-1e64-4e8c-a2ee-a1aaeb33c0da
 
 # 2. 优化静态背景深度信息
+对于静态背景，baseline仅对图像定义了重建损失，以达到渲染后的图像与原图保持一致。当对动态物体进行平移等操作时，由于动态/静态高斯点相对位置不明确出现动态物体缺失等现象，对此进行优化。
+
+## 1. 技术路线
+对于静态背景，通过已知点云映射的深度图，构建像素级的$L_1$损失。
+
+$L_{total} = (1.0 - \lambda_{dssim}) * L_{l1} + \lambda_{dssim} * (1.0 - ssim(Image, Image_{gt})) + \lambda_{dyn} * CrossEntropy(Image_{dyn},Image_{mask}) + \lambda_{depth} * L_{depth}$
+
+## 2. 总体效果
+
+![depth_opt](https://github.com/tianshapojun/Saimo/assets/10208337/0b52d582-47d8-4e7a-b7c2-2d70008a7dfb)
+
 
