@@ -36,7 +36,16 @@ https://github.com/tianshapojun/Saimo/assets/10208337/61c5135d-1e64-4e8c-a2ee-a1
 $L_{total} = (1.0 - \lambda_{dssim}) * L_{l1} + \lambda_{dssim} * (1.0 - ssim(Image, Image_{gt})) + \lambda_{dyn} * CrossEntropy(Image_{dyn},Image_{mask}) + \lambda_{depth} * L_{depth}$
 
 ## 2. 总体效果
+下图车辆经过平移(驶向行人区域)，优化前与优化后的动态物体细节。
 
-![depth_opt](https://github.com/tianshapojun/Saimo/assets/10208337/0b52d582-47d8-4e7a-b7c2-2d70008a7dfb)
+<img src="https://github.com/tianshapojun/Saimo/assets/10208337/0b52d582-47d8-4e7a-b7c2-2d70008a7dfb" width="750px">
+
+整体视频如下，
+
+https://github.com/tianshapojun/Saimo/assets/10208337/dfdf105b-4c24-4de5-9e7a-cad9387b977e
+
+上述视频中的深度图的不平滑主要是由于输入深度图的稀疏性(点云的分布)有关，
+
+<img src="https://github.com/tianshapojun/Saimo/assets/10208337/4441011d-9307-452a-b53a-59a74538e578" width="500px">
 
 
