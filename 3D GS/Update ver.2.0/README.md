@@ -5,7 +5,7 @@
 
 ## 1.2 效果展示
 
-https://github.com/user-attachments/assets/6d2ebf16-b774-462b-b324-2cf1d0faceea
+https://github.com/user-attachments/assets/3c844d5c-e1b5-4b39-ad22-09995d6daa91
 
 ## 1.3 技术细节
 - 标签文件需要提供目标物的id，从而获得完整轨迹；
