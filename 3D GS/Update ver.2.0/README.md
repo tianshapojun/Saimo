@@ -4,7 +4,8 @@
 如N个物体，初始化MN个高斯点，增量高斯球标签变量，之后每一帧图片根据标签进行对应的坐标变换。
 
 ## 1.2 效果展示
-https://github.com/user-attachments/assets/e3a37932-3fda-4ffe-9f38-d37a74954c54
+
+https://github.com/user-attachments/assets/b51c7afd-efc7-4699-a57d-c92695e38d95
 
 ## 1.3 技术细节
 - 标签文件需要提供目标物的id，从而获得完整轨迹；
