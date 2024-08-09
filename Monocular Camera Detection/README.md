@@ -11,6 +11,17 @@
 <img src="https://github.com/user-attachments/assets/4f8dc1a4-6d0f-4cde-990c-2478695e3b6e" width="750px">
 </div>
 
+> 输出文件为.txt形式，每一行(15个值,以空格间隔)记录某一帧某一物体信息，具体字段如下：
+
+> 第1个值：代表帧数；    
+> 第2个值：代表物体uid；   
+> 第3个值：代表类别,可以为['Car', 'Van', 'Truck','Pedestrian', 'Person_sitting', 'Cyclist','Tram', 'Misc' , 'DontCare']；   
+> 第4-7个值：代表物体的2D bounding box,分别为xmin、ymin、xmax、ymax；  
+> 第8-10个值：代表物体的高宽长(hwl)(单位：米)；  
+> 第11-13个值：代表3D bounding box的中心坐标(相机坐标系下)；  
+> 第14个值：代表物体的航向角(-pi,pi]；  
+> 第15个值：代表置信度；
+
 ## 2.2 预期结果可视化
 视频中数据为KITTI_tracking数据集中train_00的1-150帧，用的是真值2D、3D标签，之后用感知算法的结果替换即可。
 
