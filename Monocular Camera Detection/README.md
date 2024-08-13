@@ -3,6 +3,9 @@
 <div align=center>
 <img src="https://github.com/tianshapojun/Saimo/assets/10208337/779d131f-c76b-4c8b-890e-52ab9fae1c4f" width="750px">
 </div>
+    
+> 关于追踪算法细节，详见[[EagerMOT相关细节](https://www.overleaf.com/read/cvwndfjdztgk#36a457)]
+
 
 # 2. 输入输出接口
 ## 2.1 流程图
