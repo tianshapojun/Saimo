@@ -31,3 +31,9 @@ https://github.com/user-attachments/assets/58cc6fbf-8c9e-4473-9c4b-952965c54eb4
 
 <img src="https://github.com/tianshapojun/Saimo/assets/10208337/bc21ce88-85a4-4fab-b363-be15917299cf" width="750px">
 
+# 4. demo
+
+> 来自KITTI数据集，其中主车位姿信息由C2W给出；
+
+https://github.com/user-attachments/assets/ba561b66-45f1-442a-a1a3-8f3f82e82bed
+
