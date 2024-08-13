@@ -17,7 +17,7 @@
 > 第2个值：代表物体uid；   
 > 第3个值：代表类别，可以为['Car', 'Van', 'Truck','Pedestrian', 'Person_sitting', 'Cyclist','Tram', 'Misc' , 'DontCare']；     
 > 第4-7个值：代表物体的高宽长(hwl)(单位：米)；  
-> 第8-10个值：代表3D bounding box的中心坐标(相机坐标系下)；  
+> 第8-10个值：代表3D bounding box的中心坐标(世界坐标系下)；  
 > 第11个值：代表物体的航向角(-pi,pi]；  
 > 第12个值：代表置信度；
 
