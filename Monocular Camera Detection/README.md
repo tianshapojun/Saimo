@@ -66,9 +66,9 @@
 https://github.com/user-attachments/assets/58cc6fbf-8c9e-4473-9c4b-952965c54eb4
 
 # 3. 实施计划
-## 3.1 追踪模块计划
+## 3.1 追踪+后续模块计划
 
-<img src="https://github.com/tianshapojun/Saimo/assets/10208337/bc21ce88-85a4-4fab-b363-be15917299cf" width="750px">
+<img src="https://github.com/user-attachments/assets/1c9d13aa-e7b9-4927-8eda-145804bfe71b" width="750px">
 
 # 4. demo
 
