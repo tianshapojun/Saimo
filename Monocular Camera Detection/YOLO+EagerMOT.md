@@ -18,3 +18,9 @@
 - 第 11 列：未显示，ReID(re-identification ID)，物体的特征向量，在原文中进行追踪，未生效；
 
 ## 2.2 YOLO配置
+
+YOLOv10("yolov10m.pt")
+classes = [2,5,7]
+2: 'car'
+5: 'bus'
+7: 'truck'
