@@ -19,8 +19,26 @@
 
 ## 2.2 YOLO配置
 
-YOLOv10("yolov10m.pt")
-classes = [2,5,7]
-2: 'car'
-5: 'bus'
-7: 'truck'
+- 使用Checkpoint：yolov10m.pt"；
+- classes = [2,5,7]，其中各标签{2: 'car'5: 'bus'7: 'truck'}；
+
+## 2.3 效果对比
+
+以README中的两段视频为例，
+- 视频1：未加入2D检测：追踪物体1791次；加入2D检测：追踪物体2053次；提升**14.63%**；
+- 视频2：未加入2D检测：追踪物体239次；加入3D检测：追踪物体262次；提升**9.62%**；
+
+
+
+### 2.3.1 边缘车辆
+
+![00002](https://github.com/user-attachments/assets/694211c6-379c-404a-8b4c-a4dd8e500994)
+![00023](https://github.com/user-attachments/assets/e2b388dc-38a5-413a-9427-e45a16a73866)
+![00050](https://github.com/user-attachments/assets/4d78c30c-9728-4668-a8fe-76c2dac91709)
+![00130](https://github.com/user-attachments/assets/6ed342da-9f86-42b7-beaa-2c28aa64a4c5)
+
+### 2.3.2 缺帧补全 
+![00056](https://github.com/user-attachments/assets/7cbbd5fc-fa1a-4686-85ca-e883b022485f)
+![00232](https://github.com/user-attachments/assets/1bde02d5-1660-4ec0-9122-de99b13daf15)
+
+
