@@ -28,3 +28,26 @@ $$
 
 根据上述公式，推理时的情景如果用训练时的相机拍摄，其 $(u_{train},v_{train})$像素点的颜色由推理图像 $(f_2 * \frac{u_{train}-u_1}{f_1} + u_2, f_2 * \frac{v_{train}-v_1}{f_1} + v_2)$位置的像素点决定，
 由于运算结果不一定为整数可用双线性插值计算。
+
+将映射后的图像输入至模型即可，**效果如下。**
+
+<div align=center>
+<img src="https://github.com/user-attachments/assets/e02adddd-d671-4a98-9d5d-7eda8ee36b60" width="400px">
+</div>
+
+### 2.2 外参不同
+外参问题主要是两者安装高度不一致导致并且常常发生在车道线检测，2D图像上的车道线和肉眼观察的车道线即使一致，但如果高度预估错误的话将可能导致相对位置在图像和BEV视角相悖。**具体如下图所示**
+
+<div align=center>
+<img src="https://github.com/user-attachments/assets/0200ffa0-7d0d-4be1-a72c-91b950190d1e" width="400px">
+</div>
+
+为了简化，假设 $f_x=f_y$，内参1包含 $f_1,u_1,v_1$，内参2包含 $f_2,u_2,v_2$，外参两者一致，
+
+$$
+u_{train} = f_1 * \frac{x}{z} + u_1, v_{train} = f_1 \frac{y}{z} + v_1, 
+$$
+
+$$
+u_{eval} = f_2 * \frac{x}{z} + u_2, v_{eval} = f_2 \frac{y}{z} + v_2,
+$$
