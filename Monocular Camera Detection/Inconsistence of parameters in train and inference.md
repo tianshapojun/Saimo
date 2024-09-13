@@ -19,11 +19,11 @@
 为了简化，假设 $f_x=f_y$，内参1包含 $f_1,u_1,v_1$，内参2包含 $f_2,u_2,v_2$，外参两者一致，
 
 $$
-u_{train} = f_1 * \frac{x}{z} + u_1, v_{train} = f_1 \frac{y}{z} + v_1, 
+u_{train} = f_1 * \frac{x}{z} + u_1, v_{train} = f_1 * \frac{y}{z} + v_1, 
 $$
 
 $$
-u_{eval} = f_2 * \frac{x}{z} + u_2, v_{eval} = f_2 \frac{y}{z} + v_2,
+u_{eval} = f_2 * \frac{x}{z} + u_2, v_{eval} = f_2 * \frac{y}{z} + v_2,
 $$
 
 根据上述公式，推理时的情景如果用训练时的相机拍摄，其 $(u_{train},v_{train})$像素点的颜色由推理图像 $(f_2 * \frac{u_{train}-u_1}{f_1} + u_2, f_2 * \frac{v_{train}-v_1}{f_1} + v_2)$位置的像素点决定，
@@ -36,18 +36,41 @@ $$
 </div>
 
 ### 2.2 外参不同
-外参问题主要是两者安装高度不一致导致并且常常发生在车道线检测，2D图像上的车道线和肉眼观察的车道线即使一致，但如果高度预估错误的话将可能导致相对位置在图像和BEV视角相悖。**具体如下图所示**
+外参问题主要是两者安装高度不一致导致并且常常发生在车道线检测，2D图像上的车道线和肉眼观察的车道线即使一致，但如果高度预估错误的话将可能导致相对位置在图像和BEV视角相悖。**具体如下图所示(在FOV视角车道线和车辆不重叠，在BEV视角两者重叠)**
 
 <div align=center>
 <img src="https://github.com/user-attachments/assets/0200ffa0-7d0d-4be1-a72c-91b950190d1e" width="400px">
 </div>
 
-为了简化，假设 $f_x=f_y$，内参1包含 $f_1,u_1,v_1$，内参2包含 $f_2,u_2,v_2$，外参两者一致，
+为了简化，假设 $f_x=f_y$，内参两者一致，外参的差别在于相机安装的高度(已知)，
 
 $$
-u_{train} = f_1 * \frac{x}{z} + u_1, v_{train} = f_1 \frac{y}{z} + v_1, 
+u_{train} = f_1 * \frac{x}{z} + u_1, v_{train} = f_1 * \frac{y_1}{z} + v_1, 
 $$
 
 $$
-u_{eval} = f_2 * \frac{x}{z} + u_2, v_{eval} = f_2 \frac{y}{z} + v_2,
+u_{eval} = f_1 * \frac{x}{z} + u_1, v_{eval} = f_1 * \frac{y_2}{z} + v_1,
 $$
+
+根据上式子，可以得到 $u_{train} = u_{eval}$， $v_{train}$和 $v_{eval}$之间的关系式可以有2种表达方式：
+
+$$
+v_{eval} = v_{train} + f_1 * \frac{y_2 - y_1}{z},  (1)
+$$
+
+$$
+v_{eval} = f_1 * \frac{v_{train}-v_1}{f_1} * \frac{y_2}{y_1} + v_1, (2)
+$$
+
+对于公式(1)，未知数为z(距离)，很难得到；对于公式(2)，未知数为y(车道线对应的地面高度，因为道路不一定是平整的)，相较而言根据公式(2)加上高度假设，能够作出推理；
+
+**效果如下。**
+
+<div align=center>
+<img src="https://github.com/user-attachments/assets/ddff703a-2e3a-415e-a7f7-89e1776de46e" width="400px">
+<img src="https://github.com/user-attachments/assets/b8f87f64-d7ea-48f2-b424-039dd1e1b3d9" width="400px">
+</div>
+
+## 2.3 内外参都不同
+
+将2.1节内容和2.2节内容结合即可。
