@@ -29,7 +29,7 @@ $$
 根据上述公式，推理时的情景如果用训练时的相机拍摄，其 $(u_{train},v_{train})$像素点的颜色由推理图像 $(f_2 * \frac{u_{train}-u_1}{f_1} + u_2, f_2 * \frac{v_{train}-v_1}{f_1} + v_2)$位置的像素点决定，
 由于运算结果不一定为整数可用双线性插值计算。
 
-将映射后的图像输入至模型即可，**效果如下。**
+将映射后的图像输入至模型即可，**效果如下：**
 
 <div align=center>
 <img src="https://github.com/user-attachments/assets/e02adddd-d671-4a98-9d5d-7eda8ee36b60" width="400px">
@@ -64,7 +64,7 @@ $$
 
 对于公式(1)，未知数为z(距离)，很难得到；对于公式(2)，未知数为y(车道线对应的地面高度，因为道路不一定是平整的)，相较而言根据公式(2)加上高度假设，能够作出推理；
 
-**效果如下。**
+**效果如下：**
 
 <div align=center>
 <img src="https://github.com/user-attachments/assets/ddff703a-2e3a-415e-a7f7-89e1776de46e" width="400px">
