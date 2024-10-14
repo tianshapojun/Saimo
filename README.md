@@ -129,6 +129,9 @@ https://pytorch.org/get-started/locally/
 | `1.1`   | `0.3`             | `==2.7`, `>=3.5`, `<=3.7` |
 | `<=1.0` | `0.2`             | `==2.7`, `>=3.5`, `<=3.7` |
 
+# ffmpeg 用例
+ffmpeg -framerate 10 -i ./output/1014_sim_7/%05d.png -vf "pad=ceil(iw/2)*2:ceil(ih/2)*2" -c:v libx264 -r 10 -pix_fmt yuv420p ./output/10014_sim_7.mp4
+
 # vscode 快捷方式
 
 - ALT+ 鼠标左键 选中多行同时编辑； 
