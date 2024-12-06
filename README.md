@@ -9,12 +9,35 @@ du -sh ./* 显示当前目录下所有文件的大小
 
 https://pytorch.org/get-started/previous-versions/
 
-# conda取消自动进入base环境
+# Python Pytorch Torchvision
+https://pytorch.org/get-started/locally/
+
+| `torch`            | `torchvision`      | Python              |
+| ------------------ | ------------------ | ------------------- |
+| `main` / `nightly` | `main` / `nightly` | `>=3.8`, `<=3.11`   |
+| `2.0`              | `0.15`             | `>=3.8`, `<=3.11`   |
+| `1.13`             | `0.14`             | `>=3.7.2`, `<=3.10` |
+| `1.12`             | `0.13`             | `>=3.7`, `<=3.10`   |
+| `1.11`  | `0.12`            | `>=3.7`, `<=3.10`         |
+| `1.10`  | `0.11`            | `>=3.6`, `<=3.9`          |
+| `1.9`   | `0.10`            | `>=3.6`, `<=3.9`          |
+| `1.8`   | `0.9`             | `>=3.6`, `<=3.9`          |
+| `1.7`   | `0.8`             | `>=3.6`, `<=3.9`          |
+| `1.6`   | `0.7`             | `>=3.6`, `<=3.8`          |
+| `1.5`   | `0.6`             | `>=3.5`, `<=3.8`          |
+| `1.4`   | `0.5`             | `==2.7`, `>=3.5`, `<=3.8` |
+| `1.3`   | `0.4.2` / `0.4.3` | `==2.7`, `>=3.5`, `<=3.7` |
+| `1.2`   | `0.4.1`           | `==2.7`, `>=3.5`, `<=3.7` |
+| `1.1`   | `0.3`             | `==2.7`, `>=3.5`, `<=3.7` |
+| `<=1.0` | `0.2`             | `==2.7`, `>=3.5`, `<=3.7` |
+
+# Anaconda
+## conda取消自动进入base环境
 取消进base: conda config --set auto_activate_base false
 
 重新进base: conda config --set auto_activate_base true
 
-# Anaconda删除虚拟环境
+## Anaconda删除虚拟环境
 方法一：
 
 第一步：首先退出环境
@@ -36,7 +59,7 @@ conda deactivate
 第二步：删除环境
 conda remove -n  需要删除的环境名 --all
 
-# Anaconda 复制环境
+## Anaconda 复制环境
 #环境复制命令：
 conda create -n traget_env_name --clone source_env_name
 
@@ -44,7 +67,7 @@ conda create -n traget_env_name --clone source_env_name
 conda create -n my_numpy --clone numpy 
 (创建一个新的环境my_numpy，由numpy复制而来)
 
-# Anaconda镜像源
+## Anaconda镜像源
 1.添加镜像channel。
 
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
@@ -66,6 +89,14 @@ https://mirrors.aliyun.com/pypi/simple/
 https://pypi.douban.com/simple
 
 https://pypi.mirrors.ustc.edu.cn/simple/
+
+## conda pack迁移环境
+
+https://blog.csdn.net/qq_44722189/article/details/140957031
+
+> pip install conda-pack   
+> conda pack -n your_env_name -o your_env_name.tar.gz   
+> tar -xzvf your_env_name.tar.gz -C conda3/envs/your_env   
 
 # 在服务器上git clone github项目的过程
 
@@ -106,28 +137,6 @@ logger.addHandler(sh)
 # Python pip 错误：OSError: Could not find a suitable TLS CA certificate bundle, invalid path: /etc/ssl/certs/ca-certificates.crt
 
 sudo update-ca-certificates
-
-# Python Pytorch Torchvision
-https://pytorch.org/get-started/locally/
-
-| `torch`            | `torchvision`      | Python              |
-| ------------------ | ------------------ | ------------------- |
-| `main` / `nightly` | `main` / `nightly` | `>=3.8`, `<=3.11`   |
-| `2.0`              | `0.15`             | `>=3.8`, `<=3.11`   |
-| `1.13`             | `0.14`             | `>=3.7.2`, `<=3.10` |
-| `1.12`             | `0.13`             | `>=3.7`, `<=3.10`   |
-| `1.11`  | `0.12`            | `>=3.7`, `<=3.10`         |
-| `1.10`  | `0.11`            | `>=3.6`, `<=3.9`          |
-| `1.9`   | `0.10`            | `>=3.6`, `<=3.9`          |
-| `1.8`   | `0.9`             | `>=3.6`, `<=3.9`          |
-| `1.7`   | `0.8`             | `>=3.6`, `<=3.9`          |
-| `1.6`   | `0.7`             | `>=3.6`, `<=3.8`          |
-| `1.5`   | `0.6`             | `>=3.5`, `<=3.8`          |
-| `1.4`   | `0.5`             | `==2.7`, `>=3.5`, `<=3.8` |
-| `1.3`   | `0.4.2` / `0.4.3` | `==2.7`, `>=3.5`, `<=3.7` |
-| `1.2`   | `0.4.1`           | `==2.7`, `>=3.5`, `<=3.7` |
-| `1.1`   | `0.3`             | `==2.7`, `>=3.5`, `<=3.7` |
-| `<=1.0` | `0.2`             | `==2.7`, `>=3.5`, `<=3.7` |
 
 # ffmpeg 用例
 ffmpeg -framerate 10 -i ./output/1014_sim_7/%05d.png -vf "pad=ceil(iw/2)*2:ceil(ih/2)*2" -c:v libx264 -r 10 -pix_fmt yuv420p ./output/10014_sim_7.mp4
