@@ -19,4 +19,15 @@ GPS文件：100HZ，6000帧数据，通过week/second week确定时间戳，转�
 > 起始时间：'2024-09-13 09:29:14', 1726190954.799706   
 > 结束时间：'2024-09-13 09:30:14', 1726191014.200170
 
-从时间戳上，两者差别21s，
+从时间戳上，两者差别21s。
+
+# 2. 拼接结果
+从时间戳上对齐，举例如下，其中绿色黄绿色为251帧点云，蓝绿色为351帧点云：
+<div align=center>
+<img src="https://github.com/user-attachments/assets/13f4d5e6-5e94-4d6b-a13a-609bf380e815" width="750px">
+</div>
+
+从顺序上对齐，举例如下，其中绿色黄绿色为251帧点云，蓝绿色为351帧点云：
+<div align=center>
+<img src="https://github.com/user-attachments/assets/92a73344-7483-48e9-bd2f-d6a847a13c96" width="750px">
+</div>
