@@ -31,3 +31,6 @@ GPS文件：100HZ，6000帧数据，通过week/second week确定时间戳，转�
 <div align=center>
 <img src="https://github.com/user-attachments/assets/92a73344-7483-48e9-bd2f-d6a847a13c96" width="750px">
 </div>
+
+> 根据上述数据观察，无论是时间戳对齐或者顺序对齐效果都较差，   
+> 初步结论为**通过正常的方式利用GPS信息补齐点云数据较难实现**。
