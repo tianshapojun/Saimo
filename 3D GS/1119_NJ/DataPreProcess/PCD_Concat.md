@@ -1,4 +1,5 @@
-# 1. 数据描述
+# 点云预处理
+## 1. 数据描述
 GPS文件：100HZ，6000帧数据，通过week/second week确定时间戳，转换代码：
 
     def gps_week_seconds_to_utc(gpsweek, gpsseconds, leapseconds=LEAP_SECONDS):
@@ -21,7 +22,7 @@ GPS文件：100HZ，6000帧数据，通过week/second week确定时间戳，转�
 
 从时间戳上，两者差别21s。
 
-# 2. 拼接结果
+## 2. 拼接结果
 从轨迹时间戳上对齐，举例如下，其中绿色黄绿色为251帧点云，蓝绿色为351帧点云：
 <div align=center>
 <img src="https://github.com/user-attachments/assets/13f4d5e6-5e94-4d6b-a13a-609bf380e815" width="750px">
@@ -35,7 +36,7 @@ GPS文件：100HZ，6000帧数据，通过week/second week确定时间戳，转�
 > 根据上述数据观察，无论是轨迹时间戳对齐或者轨迹顺序对齐效果都较差，   
 > 初步结论为**通过正常的方式利用GPS信息补齐点云数据较难实现**。
 
-# 3. 强制拼接
+## 3. 强制拼接
 > 将420帧点云和480帧点云强制拼接(轨迹顺序对齐，作为三维重建初始化，对精度要求没那么高)；   
 > 上图为全部点云+点云检测结果；   
 > 下图为压缩点云+去除目标物结果；   
@@ -43,5 +44,17 @@ GPS文件：100HZ，6000帧数据，通过week/second week确定时间戳，转�
 <img src="https://github.com/user-attachments/assets/1289908f-b9a4-4251-851d-92f6b5ad01aa" width="750px">
 <img src="https://github.com/user-attachments/assets/556be3e0-f0a0-4210-9da3-2e98fd204a94" width="750px">
 </div>
+
+# 图像预处理
+## 0. 背景
+为了提升动静分离的效果，对原始图像进行掩码处理，加入第四通道(即是否mask)。
+
+## 1. Pipeline
+简要流程：
+> 原始图像-目标检测-目标追踪-图像掩码；   
+> 图像掩码的输入即目标追踪的输出，根据包围盒的8个顶点组成的凸多边形确定掩码形状；   
+> 对于图像中包含的主车引擎盖，在v方向截断(取前1900帧)；
+
+对于上述的截断操作，不影响相机的内参，其它参数无需改动。
 
 
