@@ -57,4 +57,10 @@ GPS文件：100HZ，6000帧数据，通过week/second week确定时间戳，转�
 
 对于上述的截断操作，不影响相机的内参，其它参数无需改动。
 
+## 2. 示例 
+具体如下图所示，左边为截断后的图像，右边为掩码图像。
+<div align=center>
+<img src="https://github.com/user-attachments/assets/c631c8c1-b02a-4b04-a4a4-a58bec3a30af" width="488px">
+<img src="https://github.com/user-attachments/assets/c1b3b0af-9e14-4bb1-a6b6-f431c167af64" width="500px">
+</div>
 
