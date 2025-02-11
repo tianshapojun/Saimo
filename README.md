@@ -178,6 +178,9 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '1,2,3'(在import torch 之前)
 ## 固定随机数种子
 https://ispacesoft.com/71697.html
 
+更新torch库中一些不确定性内容以及相应固定方法    
+https://pytorch.org/docs/stable/notes/randomness.html
+
 def seed_torch(seed=1029):
 
 	random.seed(seed)
@@ -195,6 +198,9 @@ def seed_torch(seed=1029):
 	torch.backends.cudnn.benchmark = False
  
 	torch.backends.cudnn.deterministic = True
+
+	os.environ['CUBLAS_WORKSPACE_CONFIG']=':16:8'
+ 	torch.use_deterministic_algorithms(True)
 
 seed_torch()
 
