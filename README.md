@@ -121,18 +121,20 @@ http://127.0.0.1:16006/
 
 # Python 添加并存储logger
 
-logger = logging.getLogger(\_\_name\_\_) \
-logger.setLevel(level = logging.INFO) \
-current_date = datetime.now().strftime('%Y%m%d%H%M%S') \
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s') \
-handler = logging.FileHandler("/content/gdrive/MyDrive/Models/STFGNN/"+str(current_date)+"_log.txt") \
-handler.setLevel(logging.INFO) \
-handler.setFormatter(formatter) \
-sh = logging.StreamHandler() \
-sh.setLevel(logging.INFO) \
-sh.setFormatter(formatter) \
-logger.addHandler(handler) \
+```python
+logger = logging.getLogger(__name__) 
+logger.setLevel(level = logging.INFO) 
+current_date = datetime.now().strftime('%Y%m%d%H%M%S') 
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s') 
+handler = logging.FileHandler("/content/gdrive/MyDrive/Models/STFGNN/"+str(current_date)+"_log.txt") 
+handler.setLevel(logging.INFO) 
+handler.setFormatter(formatter) 
+sh = logging.StreamHandler() 
+sh.setLevel(logging.INFO) 
+sh.setFormatter(formatter) 
+logger.addHandler(handler) 
 logger.addHandler(sh)
+```
 
 # Python pip 错误：OSError: Could not find a suitable TLS CA certificate bundle, invalid path: /etc/ssl/certs/ca-certificates.crt
 
@@ -157,10 +159,11 @@ Could you try registering (or re-registering) at https://waymo.com/open/licensin
 
 # Torch Tricks
 ## Calculate the number of parameters 
+```python
 total = sum([param.nelement() for param in model.parameters()])
 
 print("Number of parameter: %.2fM" % (total/1e6))
-
+```
 ## pip install mayavi fails building wheel
 from https://github.com/enthought/mayavi/issues/1232
 
@@ -181,6 +184,7 @@ https://ispacesoft.com/71697.html
 更新torch库中一些不确定性内容以及相应固定方法    
 https://pytorch.org/docs/stable/notes/randomness.html
 
+```python
 def seed_torch(seed=1029):
 
 	random.seed(seed)
@@ -203,9 +207,18 @@ def seed_torch(seed=1029):
  	torch.use_deterministic_algorithms(True)
 
 seed_torch()
+```
 
 ## pytorch 显存分配及模型推理时间统计
 
 显存分配：https://zhuanlan.zhihu.com/p/527143823?utm_id=0
 
 推理速度计算：https://zhuanlan.zhihu.com/p/376925457
+
+# Colab 使用技巧
+## 文件批量打包下载
+```python
+!zip -r /content/output.zip /content/ml-depth-pro/output
+from google.colab import files
+files.download("/content/output.zip")
+```
