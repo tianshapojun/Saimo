@@ -34,7 +34,7 @@ $$
 基于[Depth Pro](https://github.com/apple/ml-depth-pro)，获得图像的绝对深度(metric depth)；示例如下：
 
 <div align=center>
-<img src="">
+<img src="github.com/user-attachments/assets/10042ecc-0446-4d16-b07e-3830fc6fa6a1">
 </div>
 
 # 4. demo
