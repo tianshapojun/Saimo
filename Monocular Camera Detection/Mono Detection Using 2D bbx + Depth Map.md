@@ -8,6 +8,8 @@
 <img src="https://github.com/user-attachments/assets/8bd20bb1-58a6-4d61-b2aa-8f2b38cf9473">
 </div>
 
+
+
 # 3. 方案概述
 由于2D单目感知的高精度，深度预估通用模型的发展，以及部分类别物体数据的缺失，选用了2D+深度的单目感知方案。目前该方案适用于人、障碍物(锥桶)标签。
 
@@ -34,7 +36,7 @@ $$
 基于[Depth Pro](https://github.com/apple/ml-depth-pro)，获得图像的绝对深度(metric depth)；示例如下：
 
 <div align=center>
-<img src="github.com/user-attachments/assets/10042ecc-0446-4d16-b07e-3830fc6fa6a1">
+<img src="https://github.com/user-attachments/assets/10042ecc-0446-4d16-b07e-3830fc6fa6a1" width="500px">
 </div>
 
 # 4. demo
