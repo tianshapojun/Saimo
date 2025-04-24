@@ -109,4 +109,11 @@
   </tr>
 </table>
 
+**由于增加了重建损失外其它部分的权重，在测试集上图像质量显著低于配置1，在自定义视角效果也不符合预期。**
 
+## 3. 总结与未来方案
+
+- 通过对文献的再阅读，相关文献[StreetCrafter](https://arxiv.org/abs/2412.13188)、[DIFIX3D+](https://arxiv.org/pdf/2503.01774?)、[ReconDreamer](https://arxiv.org/pdf/2411.19548)、[DriveDreamer4D](https://arxiv.org/pdf/2410.13571)在训练优化器时用的是多场景数据(至少8个场景)，而非单一场景——**优化训练数据；**
+- 训练样本构建方式更新[DIFIX3D+](https://arxiv.org/pdf/2503.01774?)，包括：Cycle Reconstruction、Model Underfitting、Cross Reference。——**优化训练数据；**
+- 作为唯一开源优化器的项目[StreetCrafter](https://github.com/zju3dv/street_crafter)，**进行该优化器的效果验证；**
+- [DIFIX3D+](https://arxiv.org/pdf/2503.01774?)在实验阶段比较了pix2pix-turbo和Difix两个优化器的效果，即**验证了pix2pix-turbo的可行性和提供了优化的方向；**
