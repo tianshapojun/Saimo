@@ -5,6 +5,9 @@ du -sh ./* 显示当前目录下所有文件的大小
 
 -h输出文件系统分区使用情况，例如：1KB、1MB、1GB
 
+# 查看Linux版本
+lsb_release -a
+
 # Pytorch各版本
 
 https://pytorch.org/get-started/previous-versions/
