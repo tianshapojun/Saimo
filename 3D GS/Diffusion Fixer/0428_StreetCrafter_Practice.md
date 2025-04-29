@@ -32,6 +32,12 @@ https://github.com/user-attachments/assets/dc9d0235-70f9-47fc-bb6e-5af688a5ccf4
   <img src="https://github.com/user-attachments/assets/29da6096-fc37-436d-8db5-b5e3597e1a1b" width="450px">
 </div>
 
+### 2.2 包含/不包含图像优化器的3DGS模型
 
+自定义轨迹为主车向左平移3m，下图分别描述了(自定义轨迹)图像优化器、(自定义轨迹)W/O图像优化器的3DGS、GT、(自定义轨迹)W/图像优化器的渲染结果。
 
+## 3. 总结与未来方案
 
+- 环境车控制-**相关代码修改**；
+- 图像修复器[StreetCrafter](https://github.com/zju3dv/street_crafter)的泛化性验证：**用KITTI数据集验证，需要匹配相关数据输出格式**；
+- 图像修复器[StreetCrafter](https://github.com/zju3dv/street_crafter)的优化：推理速度过慢，**使用相同的数据替换为[Paper](https://arxiv.org/abs/2403.12036)结构进行训练**；
