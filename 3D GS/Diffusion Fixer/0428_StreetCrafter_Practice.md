@@ -1,5 +1,5 @@
 # 基于StreetCrafter的实验报告
-本次实验的目标：验证总结分析开源项目[**StreetCrafter**](https://github.com/zju3dv/street_crafter)的效果，指定后续工作计划
+本次实验的目标：验证总结分析开源项目[**StreetCrafter**](https://github.com/zju3dv/street_crafter)的效果，指定后续工作计划。
 
 ## 1. 训练配置
 模型包含两个可训练的模块：Controllable Video Generation以及Crafting Dynamic 3D Scenes模块，前者为图像(视频)优化器后者为3DGS模型。
