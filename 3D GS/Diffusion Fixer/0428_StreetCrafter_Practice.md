@@ -36,6 +36,8 @@ https://github.com/user-attachments/assets/dc9d0235-70f9-47fc-bb6e-5af688a5ccf4
 
 自定义轨迹为主车向左平移3m，下图分别描述了(自定义轨迹)图像优化器、(自定义轨迹)W/O图像优化器的3DGS、GT、(自定义轨迹)W/图像优化器的渲染结果。
 
+https://github.com/user-attachments/assets/f32d20a7-07d1-4d58-91d9-7e449522cfd1
+
 ## 3. 总结与未来方案
 
 - 环境车控制-**相关代码修改**；
