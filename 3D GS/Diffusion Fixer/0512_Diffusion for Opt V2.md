@@ -19,7 +19,7 @@
       <center>
         <img src="https://github.com/user-attachments/assets/bd060d71-5596-429f-b16b-a73a4d5cd9bb" height="250px">
         <br/>
-        <font color="AAAAAA">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;训练方式2.gif</font>
+        <font color="AAAAAA">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;训练方式2.png</font>
       </center>
     </td>
   </tr>
