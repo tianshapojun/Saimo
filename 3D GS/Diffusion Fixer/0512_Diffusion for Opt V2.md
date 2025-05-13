@@ -1,23 +1,10 @@
-# 基于扩散模型的图像优化器
+# 基于扩散模型的图像优化器 V2
 通过基于扩散模型的图像优化模块来进行数据增强，提升自定义场景数据质量，修复消除场景重建伪影以达到增强训练数据，实现提升重建模型精度与鲁棒性的目的。
 
-## 1. 训练框架
-基于 [**Paper**](https://arxiv.org/abs/2403.12036) 进行img2img的图像优化过程，其网络框架如下：
-
-<div align=center>
-<img src="https://github.com/user-attachments/assets/335e3daf-d0d5-4579-8571-d25fdf137a66" width="750px">
-</div>
-
-
-算法包含了2种训练方式，pix2pix-turbo和CycleGAN-Turbo，前者通过配对数据训练即img和img是一一对应的(轮廓图和彩色图)，后者通过非配对数据训练达到领域迁移(白天自驾场景和晚上自驾场景)。对于三维重建，上述2种训练方式都可以达成：
-> 配对训练，低质图像(未充分训练)和高质图像；
-
-> 未配对训练，低质图像(新视角图像)和高质图像；
-
-## 2. 训练结果
-### 2.1 未配对训练
-
-新视角图像为主车平移1m/2m后压缩为424x128(显存原因)，样本示例和修复结果如下：
+## 1. 训练优化方向
+- 通过对文献的再阅读，相关文献[StreetCrafter](https://arxiv.org/abs/2412.13188)、[DIFIX3D+](https://arxiv.org/pdf/2503.01774?)、[ReconDreamer](https://arxiv.org/pdf/2411.19548)、[DriveDreamer4D](https://arxiv.org/pdf/2410.13571)在训练优化器时用的是多场景数据(至少8个场景)，而非单一场景；
+- 训练样本构建方式更新参照[StreetCrafter](https://arxiv.org/abs/2412.13188)，通过点云图映射图像(训练方式1)；
+- 训练样本构建方式更新参照[DIFIX3D+](https://arxiv.org/pdf/2503.01774?)，点云图映射图像+参考图像(训练方式2)；
 
 <table rules="none" align="center">
   <tr>
@@ -25,22 +12,28 @@
       <center>
         <img src="https://github.com/user-attachments/assets/71f4672b-6dae-43bc-ba60-ff633032bf11" height="250px">
         <br/>
-        <font color="AAAAAA">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;001.png</font>
+        <font color="AAAAAA">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;训练方式1.png</font>
       </center>
     </td>
     <td>
       <center>
         <img src="https://github.com/user-attachments/assets/bd060d71-5596-429f-b16b-a73a4d5cd9bb" height="250px">
         <br/>
-        <font color="AAAAAA">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;002.gif</font>
+        <font color="AAAAAA">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;训练方式2.gif</font>
       </center>
     </td>
   </tr>
 </table>
 
+## 2. 训练结果
+### 2.1 仅点云映射图
+
+
+
+
 **可以看到修复起了一部分作用：地面和交通标识补全了部分信息，但是在清晰度上没有明显的改善。**
 
-### 2.2 配对训练
+### 2.2 点云映射图+参考图像
 损失包含：**Reconstruction loss、CLIP similarity loss、Generator loss and Discriminator loss;**
 
 低质图像从下述2中方式获取1.未充分训练数据；2.真实数据通过2.1中的b2a方式获取。通过多次实验，选取分析下述2中较为典型的训练结果。
