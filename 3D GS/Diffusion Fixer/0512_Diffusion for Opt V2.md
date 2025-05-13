@@ -39,7 +39,9 @@
 
 ### 2.2 点云映射图+参考图像
 
-> (训练配置)--lambda_clipsim=0.0 --lambda_l2=5.0 --lambda_lpips=1.0 --lambda_gan=0.0
+> (训练配置)--lambda_clipsim=0.0 --lambda_l2=5.0 --lambda_lpips=1.0 --lambda_gan=0.0；   
+> 训练样本在高度上将点云图和参考图在Height维度进行拼接，即输入为 **(B, C, 2xH, W)**；   
+> 由于输入和输出图像形状一致，取上半部分张量作为评估；
 
 修复后的图像如下：
 
@@ -51,7 +53,6 @@
 
 ## 3. 总结与未来方案
 
-- 通过对文献的再阅读，相关文献[StreetCrafter](https://arxiv.org/abs/2412.13188)、[DIFIX3D+](https://arxiv.org/pdf/2503.01774?)、[ReconDreamer](https://arxiv.org/pdf/2411.19548)、[DriveDreamer4D](https://arxiv.org/pdf/2410.13571)在训练优化器时用的是多场景数据(至少8个场景)，而非单一场景——**优化训练数据；**
-- 训练样本构建方式更新[DIFIX3D+](https://arxiv.org/pdf/2503.01774?)，包括：Cycle Reconstruction、Model Underfitting、Cross Reference。——**优化训练数据；**
-- 作为唯一开源优化器的项目[StreetCrafter](https://github.com/zju3dv/street_crafter)，**进行该优化器的效果验证；**
-- [DIFIX3D+](https://arxiv.org/pdf/2503.01774?)在实验阶段比较了pix2pix-turbo和Difix两个优化器的效果，即**验证了pix2pix-turbo的可行性和提供了优化的方向；**
+- 从训练的中间/最终结果来看，图像中车道线和车辆轮廓整体较为清晰，车辆/环境物/天空细节模糊/缺失，该部分内容在点云图上没有体现，从参考图的拼接上看并没有很好的补充；
+- 可参考的方案：将点云图和参考图经过encoder的输出进行elementwise求和；
+- 将text_embedding替换为image_embedding；
