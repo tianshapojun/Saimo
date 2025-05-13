@@ -28,81 +28,26 @@
 ## 2. 训练结果
 ### 2.1 仅点云映射图
 
+> (训练配置default)--lambda_clipsim=5.0 --lambda_l2=1.0 --lambda_lpips=5.0 --lambda_gan=0.5
 
+修复后的图像如下：
 
-
-**可以看到修复起了一部分作用：地面和交通标识补全了部分信息，但是在清晰度上没有明显的改善。**
+<div align=center>
+<img src="https://github.com/user-attachments/assets/63d41bd9-3363-43a5-8350-1bb6440faac9" width="350px">
+<img src="https://github.com/user-attachments/assets/db914ce1-57ce-4062-907a-e9cecaad5590" width="350px">
+</div>
 
 ### 2.2 点云映射图+参考图像
-损失包含：**Reconstruction loss、CLIP similarity loss、Generator loss and Discriminator loss;**
 
-低质图像从下述2中方式获取1.未充分训练数据；2.真实数据通过2.1中的b2a方式获取。通过多次实验，选取分析下述2中较为典型的训练结果。
+> (训练配置)--lambda_clipsim=0.0 --lambda_l2=5.0 --lambda_lpips=1.0 --lambda_gan=0.0
 
-#### 2.2.1 训练配置1
-> --lambda_clipsim=0 --lambda_l2=10.0 --lambda_lpips=0.0 --lambda_gan=0.0
+修复后的图像如下：
 
-第一行为输入，第二行为输出，示例如下：
+<div align=center>
+<img src="https://github.com/user-attachments/assets/36814cb7-2035-42ab-8147-c3c7e9b632ff" width="350px">
+<img src="https://github.com/user-attachments/assets/9d727f17-696d-45f7-9557-7b438679d756" width="350px">
+</div>
 
-<table rules="none" align="center">
-  <tr>
-    <td> 
-      <center>
-        <img src="https://github.com/user-attachments/assets/1cef5ff0-aa65-4365-ba8a-4e8938d0f082" width="300px">
-        <br/>
-        <font color="AAAAAA">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Test</font>
-      </center>
-    </td>
-    <td>
-      <center>
-        <img src="https://github.com/user-attachments/assets/32b6adcc-3783-498a-ba78-5e57aaa41859" width="300px">
-        <br/>
-        <font color="AAAAAA">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Left 1.0m</font>
-      </center>
-    </td>
-    <td>
-      <center>
-        <img src="https://github.com/user-attachments/assets/f1cb74f6-3918-440e-9e06-f9ec6b17a1ed" width="300px">
-        <br/>
-        <font color="AAAAAA">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Left 2.0m</font>
-      </center>
-    </td>
-  </tr>
-</table>
-
-**可以看到在测试集上效果很好(过拟合)，但在新视角下优化效果出现非常大的差别，初步分析为输入分布不同。**
-
-#### 2.2.2 训练配置2
-> (default)--lambda_clipsim=5.0 --lambda_l2=1.0 --lambda_lpips=5.0 --lambda_gan=0.5
-
-第一行为输入，第二行为输出，示例如下：
-
-<table rules="none" align="center">
-  <tr>
-    <td> 
-      <center>
-        <img src="https://github.com/user-attachments/assets/db83cf06-ae5e-4ab3-bafa-7feb5d844a98" width="300px">
-        <br/>
-        <font color="AAAAAA">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Test</font>
-      </center>
-    </td>
-    <td>
-      <center>
-        <img src="https://github.com/user-attachments/assets/36b08b02-92d5-4f5e-8333-eaf243824c36" width="300px">
-        <br/>
-        <font color="AAAAAA">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Left 1.0m</font>
-      </center>
-    </td>
-    <td>
-      <center>
-        <img src="https://github.com/user-attachments/assets/ed875bdb-ae18-4671-a1e8-f17f61aca477" width="300px">
-        <br/>
-        <font color="AAAAAA">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Left 2.0m</font>
-      </center>
-    </td>
-  </tr>
-</table>
-
-**由于增加了重建损失外其它部分的权重，在测试集上图像质量显著低于配置1，在自定义视角效果也不符合预期。**
 
 ## 3. 总结与未来方案
 
