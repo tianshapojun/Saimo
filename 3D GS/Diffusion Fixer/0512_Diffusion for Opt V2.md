@@ -56,3 +56,17 @@
 - 从训练的中间/最终结果来看，点云映射+参考图像的训练输入表现更好，图像中车道线和车辆轮廓整体较为清晰，车辆/环境物/天空细节模糊/缺失，该部分内容在点云图上没有体现，从参考图的拼接上看并没有很好的补充；
 - 可参考的方案：将点云图和参考图经过encoder的输出进行elementwise求和；
 - 将text_embedding替换为image_embedding；
+
+## 补充内容
+> 将点云图和参考图经过encoder的输出进行elementwise求和的效果如下：   
+> 左图为高度拼接，右图为特征求和，都经过8000轮次的训练；   
+> 修复效果较之前相比有所提高，在图片上半部分点云未能投影的区域展现了更多细节；
+
+<div align=center>
+<img src="https://github.com/user-attachments/assets/0d9dc404-a596-4452-882c-c50804fbc1a6" width="500px">
+<img src="https://github.com/user-attachments/assets/5dd75f21-2533-4ed8-82cc-ccca1f8da944" width="500px">
+<img src="https://github.com/user-attachments/assets/886bde47-7a30-45bb-aae2-471f5454c1a1" width="500px">
+<img src="https://github.com/user-attachments/assets/5486ab81-ef3c-4452-b174-c5c21c899952" width="500px">
+</div>
+
+
