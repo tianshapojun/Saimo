@@ -71,5 +71,6 @@ $$
 ## 3. 总结与未来方案
 - 调整训练参数，例如learning rate/各个损失的比重；
 - 如果一步去噪提升有限，是否考虑两步去噪？
-- 将text_embedding替换为image_embedding；
+- 将text_embedding替换为image_embedding ([StreetCrafter](https://arxiv.org/abs/2412.13188))；
+- 添加reference mixing layer ([DIFIX3D+](https://arxiv.org/pdf/2503.01774?));
 
