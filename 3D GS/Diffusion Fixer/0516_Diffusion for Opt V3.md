@@ -16,30 +16,16 @@ G_l(I) = \phi_l(I)^T \phi_l(I).
 $$
 
 ## 2. 训练结果
-### 2.1 仅点云映射图
-
-> (训练配置default)--lambda_clipsim=5.0 --lambda_l2=1.0 --lambda_lpips=5.0 --lambda_gan=0.5
-
-修复后的图像如下：
+### 修复后的图像
+经过20000次优化后，效果图如下(上中下分别对应实验123)：
 
 <div align=center>
-<img src="https://github.com/user-attachments/assets/63d41bd9-3363-43a5-8350-1bb6440faac9" width="350px">
-<img src="https://github.com/user-attachments/assets/db914ce1-57ce-4062-907a-e9cecaad5590" width="350px">
+<img src="https://github.com/user-attachments/assets/d0e83475-d5e3-4cb3-86aa-fe1c437bf8a4" width="1000px">
+<img src="https://github.com/user-attachments/assets/e2c788eb-298f-48f9-bc04-a4385da73911" width="1000px">
+<img src="https://github.com/user-attachments/assets/75dd49a9-81e5-4137-9734-286efb4c4ce0" width="1000px">
 </div>
 
-### 2.2 点云映射图+参考图像
-
-> (训练配置)--lambda_clipsim=0.0 --lambda_l2=5.0 --lambda_lpips=1.0 --lambda_gan=0.0；   
-> 训练样本在高度上将点云图和参考图在Height维度进行拼接，即输入为 **(B, C, 2xH, W)**；   
-> 由于输入和输出图像形状一致，取上半部分张量作为评估；
-
-修复后的图像如下：
-
-<div align=center>
-<img src="https://github.com/user-attachments/assets/36814cb7-2035-42ab-8147-c3c7e9b632ff" width="350px">
-<img src="https://github.com/user-attachments/assets/9d727f17-696d-45f7-9557-7b438679d756" width="350px">
-</div>
-
+### 指标分析
 
 ## 3. 总结与未来方案
 
@@ -51,10 +37,3 @@ $$
 > 将点云图和参考图经过encoder的输出进行elementwise求和的效果如下：   
 > 左图为高度拼接，右图为特征求和，都经过8000轮次的训练；   
 > 修复效果较之前相比有所提高，在图片上半部分点云未能投影的区域展现了更多细节；
-
-<div align=center>
-<img src="https://github.com/user-attachments/assets/0d9dc404-a596-4452-882c-c50804fbc1a6" width="500px">
-<img src="https://github.com/user-attachments/assets/5dd75f21-2533-4ed8-82cc-ccca1f8da944" width="500px">
-<img src="https://github.com/user-attachments/assets/886bde47-7a30-45bb-aae2-471f5454c1a1" width="500px">
-<img src="https://github.com/user-attachments/assets/5486ab81-ef3c-4452-b174-c5c21c899952" width="500px">
-</div>
