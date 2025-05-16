@@ -1,6 +1,19 @@
 # 基于扩散模型的图像优化器 V3
 通过基于扩散模型的图像优化模块来进行数据增强，提升自定义场景数据质量，修复消除场景重建伪影以达到增强训练数据，实现提升重建模型精度与鲁棒性的目的。
 
+## 0. 图像拼接 VS 特征elementwise求和
+
+> 将点云图和参考图经过encoder的输出进行elementwise求和的效果如下：   
+> 左图为高度拼接，右图为特征求和，都经过8000轮次的训练；   
+> 修复效果较之前相比有所提高，在图片上半部分点云未能投影的区域展现了更多细节；
+
+<div align=center>
+<img src="https://github.com/user-attachments/assets/0d9dc404-a596-4452-882c-c50804fbc1a6" width="350px">
+<img src="https://github.com/user-attachments/assets/5dd75f21-2533-4ed8-82cc-ccca1f8da944" width="350px">
+<img src="https://github.com/user-attachments/assets/886bde47-7a30-45bb-aae2-471f5454c1a1" width="350px">
+<img src="https://github.com/user-attachments/assets/5486ab81-ef3c-4452-b174-c5c21c899952" width="350px">
+</div>
+
 ## 1. 训练优化方向
 根据之前实验，通过点云图映射图像+参考图像作为模型输入，通过encoder的输出进行elementwise求和进入U-net网络，根据参考文献，做出了如下尝试；
 - 实验1，baseline，点云图映射图像+参考图像；
@@ -16,8 +29,9 @@ G_l(I) = \phi_l(I)^T \phi_l(I).
 $$
 
 ## 2. 训练结果
-### 修复后的图像
+### 2.1 修复后的图像
 经过20000次优化后，效果图如下(上中下分别对应实验123)：
+> 通过观察，实验2在图像的细节(场景1的红绿灯、场景2的建筑边缘等)方面不如实验1和实验3，后两者肉眼观察效果难以区分；
 
 <div align=center>
 <img src="https://github.com/user-attachments/assets/d0e83475-d5e3-4cb3-86aa-fe1c437bf8a4" width="1000px">
@@ -25,7 +39,7 @@ $$
 <img src="https://github.com/user-attachments/assets/75dd49a9-81e5-4137-9734-286efb4c4ce0" width="1000px">
 </div>
 
-### 指标分析
+### 2.2 指标分析
 
 ## 3. 总结与未来方案
 
