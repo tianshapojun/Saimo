@@ -75,5 +75,4 @@ upper = int(image.shape[-2] * 0.4))
 
 ## 3. 总结与未来方案
 - 将text_embedding替换为image_embedding ([StreetCrafter](https://arxiv.org/abs/2412.13188))；
-- 优化图像梯度损失和图像重建损失之间的权重；
 
