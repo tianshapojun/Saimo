@@ -16,6 +16,7 @@ $$
 ### 2.1 修复后的图像
 经过20000次优化后，效果图如下(上中下分别对应实验123)：
 > 通过观察，实验3在物体边缘上比实验1和实验2效果更优，后两者肉眼观察效果难以区分；
+> 实验3在上半部分(无点云图输入)的图像修复效果不佳，随着训练轮数的增加改善不大；
 
 <div align=center>
 <img src="https://github.com/user-attachments/assets/99376329-f007-4925-b856-193c6d14627a" width="1000px">
@@ -66,8 +67,8 @@ upper = int(image.shape[-2] * 0.4))
 从指标上看，两者各有优劣，但观察具体图像，streetcrafter的输出对物体的细节尤其是远处物体有很好的还原;
 
 <div align=center>
-<img src="" width="1000px">
-<img src="" width="1000px">
+<img src="https://github.com/user-attachments/assets/272fdef3-8a38-4c54-a0a6-349ff772db38" width="1000px">
+<img src="https://github.com/user-attachments/assets/b6d8b4e7-78f0-49ae-8997-b3f53422747b" width="1000px">
 </div>
 
 ---
