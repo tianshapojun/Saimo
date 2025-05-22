@@ -18,9 +18,9 @@ $$
 > 通过观察，实验3在物体边缘上比实验1和实验2效果更优，后两者肉眼观察效果难以区分；
 
 <div align=center>
-<img src="" width="1000px">
-<img src="" width="1000px">
-<img src="" width="1000px">
+<img src="https://github.com/user-attachments/assets/99376329-f007-4925-b856-193c6d14627a" width="1000px">
+<img src="https://github.com/user-attachments/assets/053848b9-78ba-435c-a7c4-aa155e6d38ab" width="1000px">
+<img src="https://github.com/user-attachments/assets/272fdef3-8a38-4c54-a0a6-349ff772db38" width="1000px">
 </div>
 
 ### 2.2 指标分析
@@ -33,7 +33,7 @@ $$
 | Exp2   |   20000 |     23.05 |      0.65 |      0.28 |  
 | Exp3   |   20000 |     **23.13** |      **0.68** |      0.30 |   
 
-(从数值结果来看，以MSE作为重建损失效果更好，添加了style loss略微较低了指标水平)；
+从数值结果来看，加入了图像梯度损失后修复效果更佳，以实验2的参数配置二步去噪的结果比较一步去噪没有明显提升；
 
 ---
 
@@ -63,7 +63,7 @@ upper = int(image.shape[-2] * 0.4))
 
 ---
 
-（从指标上看，两者各有优劣，但观察具体图像，streetcrafter的输出在轮廓边缘上更清晰线条更突出;)
+从指标上看，两者各有优劣，但观察具体图像，streetcrafter的输出对物体的细节尤其是远处物体有很好的还原;
 
 <div align=center>
 <img src="" width="1000px">
