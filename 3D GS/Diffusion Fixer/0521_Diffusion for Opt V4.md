@@ -76,3 +76,9 @@ upper = int(image.shape[-2] * 0.4))
 ## 3. 总结与未来方案
 - 将text_embedding替换为image_embedding ([StreetCrafter](https://arxiv.org/abs/2412.13188))；
 
+## 补充
+streetcrafter修复器输出80张图片耗时约22分钟，当前修复器耗时约1分钟。
+
+https://github.com/user-attachments/assets/59c1762f-971b-4dc1-9ea4-f01267226f23
+
+
