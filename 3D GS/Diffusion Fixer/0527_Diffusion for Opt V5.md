@@ -19,10 +19,11 @@ $$
 > 实验3在上半部分(无点云图输入)的图像修复效果不佳，随着训练轮数的增加改善不大；
 
 <div align=center>
-<img src="https://github.com/user-attachments/assets/99376329-f007-4925-b856-193c6d14627a" width="1000px">
-<img src="https://github.com/user-attachments/assets/053848b9-78ba-435c-a7c4-aa155e6d38ab" width="1000px">
 <img src="https://github.com/user-attachments/assets/272fdef3-8a38-4c54-a0a6-349ff772db38" width="1000px">
+<img src="https://github.com/user-attachments/assets/ae5d5638-61a2-4ee1-ba5b-a88098ad4526" width="1000px">
+<img src="https://github.com/user-attachments/assets/b6d8b4e7-78f0-49ae-8997-b3f53422747b" width="1000px">
 </div>
+
 
 ### 2.2 指标分析
 通过PSNR、SSIM进行量化的指标计算，比较上述实验结果，共选取了测试集6个场景共100张图片；
