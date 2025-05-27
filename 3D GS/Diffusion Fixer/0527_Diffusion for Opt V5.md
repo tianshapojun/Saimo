@@ -2,21 +2,47 @@
 通过基于扩散模型的图像优化模块来进行数据增强，提升自定义场景数据质量，修复消除场景重建伪影以达到增强训练数据，实现提升重建模型精度与鲁棒性的目的。
 
 ## 1. 训练优化方向
-根据之前实验，通过点云图映射图像+参考图像作为模型输入，通过encoder的输出进行elementwise求和进入U-net网络，根据参考文献，做出了如下尝试；
+根据之前实验，baseline的部分模块如下：
+> a.通过点云图映射图像+参考图像作为模型输入，   
+> b.点云图通过encoder的输出和参考图的encoder后接cross-attention进行elementwise求和进入U-net网络，   
+> c.损失函数加入图像梯度损失，   
+
+根据参考文献，做出了如下尝试；
 - 实验0，baseline；
-- 实验1，由直接elementwise求和变为参考图的encoder接self-attention后elementwise求和；
-- 实验2，实验1+一步去噪改为二步去噪；
-- 实验3，实验1+图像梯度损失；
-  
-$$ 
-L_{gradient} = \frac{1}{N} \sum_{l=1}^{N} \left\| \nabla \hat{I} - \nabla I \right\|_1, 
-$$
+- 实验1，模型训练输入从点云图调整为未充分训练的图像(背景修复效果提升难度大)；
+- 实验2，模型训练输入从点云图调整为未充分训练的图像+点云图(背景修复效果提升难度大)；
+
+<table rules="none" align="center">
+  <tr>
+    <td> 
+      <center>
+        <img src="https://github.com/user-attachments/assets/e60d6e09-cc26-4b3e-9e3f-e21fe5abb8d1" height="350px">
+        <br/>
+        <font color="AAAAAA">&emsp;&emsp;&emsp;&emsp;&emsp;实验0样本.png</font>
+      </center>
+    </td>
+    <td> 
+      <center>
+        <img src="https://github.com/user-attachments/assets/51562346-9ace-4f8b-a85e-0623b9e3870c" height="350px">
+        <br/>
+        <font color="AAAAAA">&emsp;&emsp;&emsp;&emsp;&emsp;实验1样本.png</font>
+      </center>
+    </td>
+    <td>
+      <center>
+        <img src="https://github.com/user-attachments/assets/3e1149f0-d9df-4aa2-9be9-8e21a50f171a" height="350px">
+        <br/>
+        <font color="AAAAAA">&emsp;&emsp;实验2样本.png</font>
+      </center>
+    </td>
+  </tr>
+</table>
 
 ## 2. 训练结果
 ### 2.1 修复后的图像
-经过20000次优化后，效果图如下(上中下分别对应实验123)：
-> 通过观察，实验3在物体边缘上比实验1和实验2效果更优，后两者肉眼观察效果难以区分；
-> 实验3在上半部分(无点云图输入)的图像修复效果不佳，随着训练轮数的增加改善不大；
+经过一定次数训练后，效果图如下(上中下分别对应实验?)：
+> 实验1相比较base实验在背景修复效果上提升巨大；   
+> 实验1的数据较依赖于未充分训练的图像，即输入图像伪影、色散情况较严重，修复图目前无法修正，但此状况可以通过迭代训练来减弱或回避；
 
 <div align=center>
 <img src="https://github.com/user-attachments/assets/272fdef3-8a38-4c54-a0a6-349ff772db38" width="1000px">
