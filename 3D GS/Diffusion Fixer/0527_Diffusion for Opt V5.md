@@ -136,12 +136,10 @@
 
 
 ## 3. 总结与未来方案
+> **目前阶段，在特定样本集上，pix2pix一步去噪修复器的训练以及推理结果满足基本需求，和文献方案相比也是有竞争力的；**
+
+后续的改进优化点
+- 比较相同数据集不同场景、不同数据集的修复效果(泛化性)；
+- [NTA-IoU/NTL-IoU](https://arxiv.org/abs/2410.13571) 指标计算；
 - 将text_embedding替换为image_embedding ([StreetCrafter](https://arxiv.org/abs/2412.13188))；
-- 模型训练输入从点云图调整为未充分训练的图像(背景修复效果提升难度大)；
-
-## 补充
-streetcrafter修复器输出80张图片耗时约22分钟，当前修复器耗时约1分钟。
-
----
-
-https://github.com/user-attachments/assets/59c1762f-971b-4dc1-9ea4-f01267226f23
+- 环境车的修复解决方案
