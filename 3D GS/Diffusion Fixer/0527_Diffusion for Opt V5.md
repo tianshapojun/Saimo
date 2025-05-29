@@ -142,4 +142,5 @@
 - 比较相同数据集不同场景、不同数据集的修复效果(泛化性)；
 - [NTA-IoU/NTL-IoU](https://arxiv.org/abs/2410.13571) 指标计算；
 - 将text_embedding替换为image_embedding ([StreetCrafter](https://arxiv.org/abs/2412.13188))；
-- 环境车的修复解决方案
+- 环境车的修复解决方案；
+- 和3D GS框架融合；
