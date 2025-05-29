@@ -95,6 +95,8 @@
 > 实验1的数据较依赖于未充分训练的图像，即输入图像伪影、色散情况较严重，修复图目前无法修正，但此状况可以通过迭代训练来减弱或回避；
 选取相同测试集，比较当前修复器和streetcrafter中修复器的表现效果
 
+#### 2.2.2 指标分析
+
 | Eeperiment   | Batch  |   DataSet |   PSNR(↑) |   SSIM(↑) |    LPIPS(↓) | 
 |:----------|----------:|------:|------:|----------:|----------:|
 | Exp0 (20000)  |20000 |   Waymo049 |      **25.57**|       0.75|    **0.22**|
@@ -102,32 +104,6 @@
 | Exp1 (20000)  |10000 |   Waymo049 |      25.42|       **0.76**|    0.24| 
 | StreetCrafter  |--- |  Waymo049 |      25.26|       0.75|    0.28|  
 
----
-
-在代码中，streetcrafter在计算修复器和生成图的损失时，只截取了图片的下半部分
-```
-image[:, upper:, :]
-upper = int(image.shape[-2] * 0.4))
-```
-因此我们评估裁剪后图片的相应指标：
-
-| Eeperiment   |   DataSet |   PSNR(↑) |   SSIM(↑) |    LPIPS(↓) |   DataSet |   PSNR(↑) |   SSIM(↑) |    LPIPS(↓) |
-|:----------|----------:|------:|----------:|----------:|----------:|----------:|----------:|----------:|
-| Exp1 (20000)  |   Waymo049 |      26.12|       0.76|    **0.22**|   Waymo176 |      23.97|       0.71|      **0.24**|
-| Exp2 (20000)  |   Waymo049 |      26.21|       0.75|    0.23|   Waymo176 |      23.80|       0.69|      0.25|
-| Exp3 (20000)  |   Waymo049 |      26.36|       0.76|    0.24|   Waymo176 |      **24.38**|       0.73|      0.25|
-| StreetCrafter  |  Waymo049 |      **27.06**|       **0.81**|    0.29|   Waymo176 |      22.58|       **0.75**|      **0.24**|
-
----
-
-从指标上看，两者各有优劣，但观察具体图像，streetcrafter的输出对物体的细节尤其是远处物体有很好的还原;
-
-<div align=center>
-<img src="https://github.com/user-attachments/assets/272fdef3-8a38-4c54-a0a6-349ff772db38" width="1000px">
-<img src="https://github.com/user-attachments/assets/b6d8b4e7-78f0-49ae-8997-b3f53422747b" width="1000px">
-</div>
-
----
 
 ## 3. 总结与未来方案
 - 将text_embedding替换为image_embedding ([StreetCrafter](https://arxiv.org/abs/2412.13188))；
