@@ -1,12 +1,17 @@
 # Linux之显示文件或目录所占用的磁盘空间
-du -sh ./* 显示当前目录下所有文件的大小
+`du -sh ./*` 显示当前目录下所有文件的大小
 
 -s 显示文件或整个目录的大小，默认单位为KB
 
 -h输出文件系统分区使用情况，例如：1KB、1MB、1GB
 
 # 查看Linux版本
-lsb_release -a
+`lsb_release -a`
+
+# 查找指定进程号
+例如：0522.py结尾的python文件
+
+`ps -ef | grep 0522.py`
 
 # Pytorch各版本
 
@@ -36,52 +41,52 @@ https://pytorch.org/get-started/locally/
 
 # Anaconda
 ## conda取消自动进入base环境
-取消进base: conda config --set auto_activate_base false
+取消进base: `conda config --set auto_activate_base false`
 
-重新进base: conda config --set auto_activate_base true
+重新进base: `conda config --set auto_activate_base true`
 
 ## Anaconda删除虚拟环境
 方法一：
 
 第一步：首先退出环境
-conda deactivate
+`conda deactivate`
  
 第二步：查看虚拟环境列表，此时出现列表的同时还会显示其所在路径
-conda env list
+`conda env list`
  
 第三步：删除环境
-conda env remove -p 要删除的虚拟环境路径
+`conda env remove -p 要删除的虚拟环境路径`
 
-conda env remove -p /home/kuucoss/anaconda3/envs/tfpy36   #我的例子
+`conda env remove -p /home/kuucoss/anaconda3/envs/tfpy36`   #我的例子
 
 方法二：
 
 第一步：首先退出环境
-conda deactivate
+`conda deactivate`
  
 第二步：删除环境
-conda remove -n  需要删除的环境名 --all
+`conda remove -n  需要删除的环境名 --all`
 
 ## Anaconda 复制环境
 #环境复制命令：
-conda create -n traget_env_name --clone source_env_name
+`conda create -n traget_env_name --clone source_env_name`
 
 举例：
-conda create -n my_numpy --clone numpy 
+`conda create -n my_numpy --clone numpy`
 (创建一个新的环境my_numpy，由numpy复制而来)
 
 ## Anaconda镜像源
 1.添加镜像channel。
 
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+`conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/`
 
 2.删除镜像channel。
 
-conda config --remove channels  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+`conda config --remove channels  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/`
 
 3.展示目前已有的镜像channel。
 
-conda config --show channels
+`conda config --show channels`
 
 https://mirrors.bfsu.edu.cn/anaconda/pkgs/main/
 
@@ -108,11 +113,11 @@ https://blog.csdn.net/a61022706/article/details/122228080
 # 服务器运行Tensorboard本地查看的方法
 服务器终端中输入
 
-$ tensorboard --logdir=./runs
+`$ tensorboard --logdir=./runs`
 
 本地终端中输入：
 
-ssh -L 16006:127.0.0.1:6006 user@sevcerip 
+`ssh -L 16006:127.0.0.1:6006 user@sevcerip `
 
 16006:本地端口号;\
 127.0.0.1:本地ip;\
@@ -141,10 +146,10 @@ logger.addHandler(sh)
 
 # Python pip 错误：OSError: Could not find a suitable TLS CA certificate bundle, invalid path: /etc/ssl/certs/ca-certificates.crt
 
-sudo update-ca-certificates
+`sudo update-ca-certificates`
 
 # ffmpeg 用例
-ffmpeg -framerate 10 -i ./output/1014_sim_7/%05d.png -vf "pad=ceil(iw/2)*2:ceil(ih/2)*2" -c:v libx264 -r 10 -pix_fmt yuv420p ./output/10014_sim_7.mp4
+`ffmpeg -framerate 10 -i ./output/1014_sim_7/%05d.png -vf "pad=ceil(iw/2)*2:ceil(ih/2)*2" -c:v libx264 -r 10 -pix_fmt yuv420p ./output/10014_sim_7.mp4`
 
 # vscode 快捷方式
 
@@ -173,13 +178,13 @@ from https://github.com/enthought/mayavi/issues/1232
 pip install https://github.com/enthought/mayavi/zipball/master
 
 ## 特定GPU可见
-1.CUDA_VISIBLE_DEVICES='1' python train.py
+1. `CUDA_VISIBLE_DEVICES='1' python train.py`
 
-2.in .py file
-
+2. in .py file
+```python
 import os
-
 os.environ['CUDA_VISIBLE_DEVICES'] = '1,2,3'(在import torch 之前)
+```
 
 ## 固定随机数种子
 https://ispacesoft.com/71697.html
