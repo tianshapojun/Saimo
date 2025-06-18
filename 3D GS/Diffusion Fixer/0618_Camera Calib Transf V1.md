@@ -1,0 +1,45 @@
+# 相机校准转换 V1
+3.1项目的需求是将路采数据的传感器数据转换为标准格式，对于相机来说即外参、内参、图像长宽的转换。根据之前训练的图像修复器对主车轨迹进行左右平移，渲染修复后的图像加入训练效果不理想
+，因此改变思路：将标准格式的图像修复后加入样本训练，评估结果。
+
+## 1. 各项比较基线
+
+- 实验0，训练集+左右平移+gs天空模型   
+- 实验1，训练集+左右平移+nerf天空模型   
+- 实验2，训练集+标准格式(nerf天空模型修复得到)   
+
+注：不同的天空模型在相机参数变换后效果不同；gs天空模型在原始轨迹、平移轨迹渲染效果较好于nerf天空模型，但在此情况下出现类似于光晕的现象，不如nerf天空模型，**具体如下**；
+
+<div align=center>
+    
+  --- 
+  
+  <img src="https://github.com/user-attachments/assets/fc996c9b-292d-48d0-bf1e-0ca4ff866b31" width="1000px">
+  <font color="AAAAAA">gs天空模型.png</font>
+  
+  --- 
+  
+  <img src="https://github.com/user-attachments/assets/182ba27f-2b6b-4d5b-9e79-5ca117765d7b" width="1000px">
+  <font color="AAAAAA">nerf天空模型.png</font>
+    
+  --- 
+
+</div>
+  
+## 2. 结果验证
+### 2.1 渲染效果
+
+
+
+
+
+### 2.2 指标分析
+通过 [FID](https://proceedings.neurips.cc/paper/2017/hash/8a1d694707eb0fefe65871369074926d-Abstract.html) 进行量化的指标计算，比较上述实验结果在Waymo测试集中的效果(目前测试1个场景，后续拓展)；
+
+| Eeperiment   | Batch  |   DataSet |    FID(↓) | 
+|:----------|----------:|------:|--------:|
+| Exp0   |90000 |   Waymo049 |    98.25|
+| Exp1   |90000 |   Waymo049 |    78.67|  
+| Exp2   |90000 |   Waymo049 |    | 
+
+---
