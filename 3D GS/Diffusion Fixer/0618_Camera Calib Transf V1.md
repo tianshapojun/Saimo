@@ -30,9 +30,9 @@
 ## 2. 结果验证
 ### 2.1 渲染效果
 
+(基于nerf天空模型) 实验1和实验2的对比视频如[链接1](https://github.com/user-attachments/assets/24ef8d46-4421-473d-9c23-78ee2e0d5e0f)；
 
-
-
+(基于gs天空模型) 实验0和实验3的对比视频如[链接2]()；
 
 ### 2.2 指标分析
 通过 [FID](https://proceedings.neurips.cc/paper/2017/hash/8a1d694707eb0fefe65871369074926d-Abstract.html) 进行量化的指标计算，比较上述实验结果在Waymo测试集中的效果(目前测试1个场景，后续拓展)；
