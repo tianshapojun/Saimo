@@ -32,7 +32,7 @@
 
 (基于nerf天空模型) 实验1和实验2的对比视频如[链接1](https://github.com/user-attachments/assets/24ef8d46-4421-473d-9c23-78ee2e0d5e0f)；
 
-(基于gs天空模型) 实验0和实验3的对比视频如[链接2]()；
+(基于gs天空模型) 实验0和实验3的对比视频如[链接2](https://github.com/user-attachments/assets/47be620c-314f-4b26-8ddf-ee8c7df073d4)；
 
 ### 2.2 指标分析
 通过 [FID](https://proceedings.neurips.cc/paper/2017/hash/8a1d694707eb0fefe65871369074926d-Abstract.html) 进行量化的指标计算，比较上述实验结果在Waymo测试集中的效果(目前测试1个场景，后续拓展)；
@@ -42,7 +42,7 @@
 | Exp0   |90000 |   Waymo049 |[0,1,2]    |    98.25| 
 | Exp1   |90000 |   Waymo049 |[0,1,2]    |    78.67| 
 | Exp2   |90000 |   Waymo049 |[0,1,2]    |    78.38| 
-| Exp3   |90000 |   Waymo049 |[0,1,2]    |         | 
+| Exp3   |90000 |   Waymo049 |[0,1,2]    |    **76.33**| 
 
 ---
 
