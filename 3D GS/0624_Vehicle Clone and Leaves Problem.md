@@ -61,25 +61,41 @@ $$
 > c. 移植object嵌入新background的高拟真度；
 
 ## 附：树叶问题研究
-通过之前的模型训练，发现在渲染(GT，平移，相机参数转换时)树叶时会出现模糊遮挡、局部透明等现象，举例如下： 
+通过之前的模型训练，发现在渲染(GT，平移，相机参数转换时)树叶时会出现模糊遮挡的现象，举例如下： 
 
 <table rules="none" align="center">
   <tr>
     <td> 
       <center>
-        <img src="https://github.com/user-attachments/assets/e50cb443-47ab-4c69-a43f-706675cc6104" height="200px">
+        <img src="https://github.com/user-attachments/assets/e50cb443-47ab-4c69-a43f-706675cc6104" height="150px">
         <br/>
-        <font color="AAAAAA">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;模糊遮挡1.png</font>
+        <font color="AAAAAA">&emsp;&emsp;&emsp;&emsp;模糊遮挡1.png</font>
       </center>
     </td>
     <td> 
       <center>
-        <img src="https://github.com/user-attachments/assets/f7b1478b-107b-416a-a4eb-893f3ab7024f" height="200px">
+        <img src="https://github.com/user-attachments/assets/f7b1478b-107b-416a-a4eb-893f3ab7024f" height="150px">
         <br/>
-        <font color="AAAAAA">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;模糊遮挡2.png</font>
+        <font color="AAAAAA">&emsp;&emsp;&emsp;&emsp;模糊遮挡2.png</font>
+      </center>
+    </td>
+    <td> 
+      <center>
+        <img src="https://github.com/user-attachments/assets/a292ca27-5e7f-468d-bc08-3e9288c29fcd" height="150px">
+        <br/>
+        <font color="AAAAAA">&emsp;&emsp;&emsp;&emsp;&emsp;模糊遮挡3.png</font>
       </center>
     </td>
   </tr>
 </table>
 
+--- 
+
+经研究实验，调整background模型中高斯椭球的extent即控制椭球大小基本能改善此情况。默认配置extent =20，控制椭球大小上界为2，
+更改后extent =2，控制椭球大小上界为0.2，效果如下：
+
+<div align=center>
+  <img src="https://github.com/user-attachments/assets/5599987d-c164-448e-8605-08af5b1e9de7" width="650px">
+  <img src="https://github.com/user-attachments/assets/d92149af-f93f-4121-bdaa-6bfaf1642333" width="650px">
+</div>
 
