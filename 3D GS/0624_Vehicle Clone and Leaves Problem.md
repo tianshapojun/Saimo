@@ -1,4 +1,4 @@
-# 不同场景中的车模移植 Part:1
+# 不同场景中的车模移植 Part:1， 附：树叶异常问题研究
 对于训练好的一个场景模型，如仅使用场景内的动态车模进行泛化(主车、环境车控制)会有极大的局限性，在该场景内添加多种车辆类型、多种车辆外观是必要的。
 因此，本topic讨论场景之间已训练好的动态物体模型移植的方案流程，期冀在存储一定量模型之后形成相应的模型库。
 
@@ -58,3 +58,27 @@ $$
 > a. object模型拆分保存；   
 > b. object航向角控制；   
 > c. 移植object嵌入新background的高拟真度；
+
+## 附：树叶问题研究
+通过之前的模型训练，发现在渲染(GT，平移，相机参数转换时)树叶时会出现模糊遮挡、局部透明等现象，举例如下： 
+
+<table rules="none" align="center">
+  <tr>
+    <td> 
+      <center>
+        <img src="https://github.com/user-attachments/assets/e50cb443-47ab-4c69-a43f-706675cc6104" height="200px">
+        <br/>
+        <font color="AAAAAA">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;模糊遮挡1.png</font>
+      </center>
+    </td>
+    <td> 
+      <center>
+        <img src="https://github.com/user-attachments/assets/f7b1478b-107b-416a-a4eb-893f3ab7024f" height="200px">
+        <br/>
+        <font color="AAAAAA">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;模糊遮挡2.png</font>
+      </center>
+    </td>
+  </tr>
+</table>
+
+
