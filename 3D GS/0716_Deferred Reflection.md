@@ -15,3 +15,54 @@
 > baseline，渲染图层(gsplat);   
 > 方案1，渲染图层(c7) + 镜面反射图层(c7);   
 > 方案2，渲染图层(gsplat) + 镜面反射图层(c7);
+
+## 2. 实验结果
+### 2.1 指标分析
+| Eeperiment   |   Batch |  # Scenes | PSNR(↑) |   SSIM(↑) |
+|:----------|--------------:|----------:|----------:|----------:|
+| baseline   |   30000 |  121 | 26.94  |    0.81   |
+| 方案1   |   30000 |  121 | 24.73  |     - |
+| 方案2   |   30000 |   121 | 26.75  |     0.81 | 
+
+---
+
+通过指标来看，baseline和方案2结果相差不大，而方案1的渲染效果较差。
+
+### 2.2 envmap渲染效果
+
+<table rules="none" align="center">
+  <tr>
+    <td> 
+      <center>
+        <img src="https://github.com/user-attachments/assets/1f946904-e3b8-4e1f-bd1a-9420b611b25e" height="150px">
+        <br/>
+        <font color="AAAAAA">&emsp;&emsp;&emsp;Iteration:1000.png</font>
+      </center>
+    </td>
+    <td> 
+      <center>
+        <img src="https://github.com/user-attachments/assets/5edb5906-415d-4016-80c6-cf789e05f889" height="150px">
+        <br/>
+        <font color="AAAAAA">&emsp;&emsp;&emsp;Iteration:7000.png</font>
+      </center>
+    </td>
+    <td>
+      <center>
+        <img src="https://github.com/user-attachments/assets/6fae5154-b935-4d29-a0a4-81e6d9e9e907" height="150px">
+        <br/>
+        <font color="AAAAAA">&emsp;&emsp;&emsp;Iteration:10000.png</font>
+      </center>
+    </td>
+    <td>
+      <center>
+        <img src="https://github.com/user-attachments/assets/8a21f6ec-f37b-4d88-a5ad-679cc2ba38d9" height="150px">
+        <br/>
+        <font color="AAAAAA">&emsp;&emsp;&emsp;Iteration:27000.png</font>
+      </center>
+    </td>
+  </tr>
+</table>
+
+---
+
+
