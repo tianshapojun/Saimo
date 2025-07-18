@@ -81,7 +81,7 @@
 #### 2.1.2 指标分析
 通过PSNR、SSIM进行量化的指标计算，比较上述实验结果在对应测试集中的5个场景图片；
 
-| Eeperiment   |   Batch |  # Scenes | PSNR(↑) |   SSIM(↑) |    LPIPS(↓) |  # Scenes | PSNR(↑) |   SSIM(↑) |    LPIPS(↓) |
+| Experiment   |   Batch |  # Scenes | PSNR(↑) |   SSIM(↑) |    LPIPS(↓) |  # Scenes | PSNR(↑) |   SSIM(↑) |    LPIPS(↓) |
 |:----------|--------------:|----------:|----------:|----------:|----------:|----------:|----------:|----------:|----------:|
 | Exp0   |   20000 |  5 | 23.20  |    0.67   |   0.31    |  1 | 24.53  |    0.78   |   0.46    |  
 | Exp1   |   10000 |  5 | 24.65  |     **0.73** |   0.27   |  1 | **27.62**  |    **0.82**   |   0.37    |
@@ -136,7 +136,7 @@
 #### 2.2.2 指标分析
 通过 [FID](https://proceedings.neurips.cc/paper/2017/hash/8a1d694707eb0fefe65871369074926d-Abstract.html) 进行量化的指标计算，比较上述实验结果在Waymo测试集中的效果(目前测试1个场景，后续拓展)；
 
-| Eeperiment   | Batch  |   DataSet |    FID(↓) | 
+| Experiment   | Batch  |   DataSet |    FID(↓) | 
 |:----------|----------:|------:|--------:|
 | Exp0   |20000 |   Waymo049 |    124.47|
 | Exp1   |10000 |   Waymo049 |    98.18|  
