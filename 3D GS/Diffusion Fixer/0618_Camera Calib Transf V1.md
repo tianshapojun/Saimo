@@ -37,7 +37,7 @@
 ### 2.2 指标分析
 通过 [FID](https://proceedings.neurips.cc/paper/2017/hash/8a1d694707eb0fefe65871369074926d-Abstract.html) 进行量化的指标计算，比较上述实验结果在Waymo测试集中的效果(目前测试1个场景，后续拓展)；
 
-| Eeperiment   | Batch  |   DataSet |   Camera |    FID(↓) |
+| Experiment   | Batch  |   DataSet |   Camera |    FID(↓) |
 |:----------|----------:|------:|--------:|--------:|
 | Exp0   |90000 |   Waymo049 |[0,1,2]    |    98.25| 
 | Exp1   |90000 |   Waymo049 |[0,1,2]    |    78.67| 
@@ -47,7 +47,7 @@
 ---
 对于实验3，我们额外分析了PSNR、SSIM在Interpolation实验(训练测试一半一半)中的表现并于baseline比较(未任何修复)。
 
-| Eeperiment   | Batch  |   DataSet |   Camera |    PSNR(↑) |    SSIM(↑) |
+| Experiment   | Batch  |   DataSet |   Camera |    PSNR(↑) |    SSIM(↑) |
 |:----------|----------:|------:|--------:|--------:|--------:|
 | Base   |30000 |   Waymo049 |[0]        |    31.51|     0.89|
 | Exp3   |90000 |   Waymo049 |[0]        |    28.93|     0.85|
