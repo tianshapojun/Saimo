@@ -42,7 +42,7 @@ $$
 ### 2.2 指标分析
 通过PSNR、SSIM进行量化的指标计算，比较上述实验结果，共选取了测试集6个场景共239张图片；
 
-| Eeperiment   |   Batch |   PSNR |   SSIM |  
+| Experiment   |   Batch |   PSNR |   SSIM |  
 |:----------|--------------:|----------:|----------:|
 | Exp1 (basic)  |   20000 |     23.01 |      0.65 |  
 | Exp1 (basic)  |   41000 |     23.52 |      0.66 |
@@ -54,7 +54,7 @@ $$
 ---
 
 选取相同测试集，比较当前修复器和streetcrafter中修复器的表现效果
-| Eeperiment   |   DataSet |   PSNR(↑) |   SSIM(↑) |    LPIPS(↓) |   DataSet |   PSNR(↑) |   SSIM(↑) |    LPIPS(↓) |
+| Experiment   |   DataSet |   PSNR(↑) |   SSIM(↑) |    LPIPS(↓) |   DataSet |   PSNR(↑) |   SSIM(↑) |    LPIPS(↓) |
 |:----------|----------:|------:|----------:|----------:|----------:|----------:|----------:|----------:|
 | Exp1 (41000)  |   Waymo049 |     **26.01** |      **0.75** |   **0.22** |   Waymo176 |     **22.47** |      0.61 |     0.27 |  
 | StreetCrafter  |  Waymo049 |     25.26 |      **0.75** |   0.28 |   Waymo176 |     21.60 |      **0.69** |     **0.23** |
