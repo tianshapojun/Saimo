@@ -26,5 +26,6 @@
 
 | Experiment   |   Batch |  PSNR_train(↑) | PSNR_test(↑) |   Envmap |
 |:----------:|:-------------:|:----------:|:----------:|:----------:|
-| Exp1   |   30000 |  27.75 | 25.72  |   <img height="250" alt="image" src="https://github.com/user-attachments/assets/e4604a29-bf3d-4379-85b1-1ec807b32867" />
-  |
+| Exp1   |   30000 |  27.75 | 25.72  |   <img height="250" alt="image" src="https://github.com/user-attachments/assets/e4604a29-bf3d-4379-85b1-1ec807b32867" />|
+| Exp2   |   30000 |  28.69 | 25.73  |   <img height="250" alt="image" src="https://github.com/user-attachments/assets/238c9d07-8dd1-451c-bf35-9fb30428b467" />
+|
