@@ -19,7 +19,7 @@
 |   渲染器(3D-GS) | gsplat  |
 |   渲染器(DR) |  gsplat |
 |   最终成像 | `final_color = rendered_color[0].clone() obj_bound = camera.guidance['obj_bound'].squeeze(0) if 'obj_bound' in camera.guidance else None final_color[obj_bound] = refl_color[obj_bound] * refl_strength[obj_bound] + rendered_color[0][obj_bound] * (1 - refl_strength[obj_bound])`  |
-|   损失函数(重建) |   `loss += optim_args.lambda_l1 * l1_loss(image, gt_image, mask=obj_bound) * 2` |
+|   损失函数(重建) |   `loss += optim_args.lambda_l1 * l1_loss(image, gt_image, mask=obj_bound) * 11` |
 |   损失函数(反射) |   `_, refls_ndr = gaussians.get_refl if refls_ndr is not None and len(refls_ndr) > 0: refl_msk_loss = refls_ndr.mean() loss += REFL_MSK_LOSS_W * refl_msk_loss` |
 
 ## 3. 实验结果 
@@ -27,5 +27,5 @@
 | Experiment   |   Batch |  PSNR_train(↑) | PSNR_test(↑) |   Envmap |
 |:----------:|:-------------:|:----------:|:----------:|:----------:|
 | No-DR  |   30000 | 27.36 | 26.67  |   --- |
-| Exp1   |   30000 |   |   |   |
+| Exp1   |   30000 | 25.48  |  24.91 |   |
 | Exp2   |   30000 |   |   |   |
