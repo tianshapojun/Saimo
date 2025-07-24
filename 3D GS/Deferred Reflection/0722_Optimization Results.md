@@ -10,6 +10,7 @@
 |:----------:|:------------:|
 |   渲染器(3D-GS) | gsplat  |
 |   渲染器(DR) |  gsplat |
+|   refl_strength |  初始化：1e-3 对于动态物体，1e-6其它 |
 |   最终成像 | `final_color = (1-refl_strength) * rendered_color[0] + refl_strength * refl_color`  |
 |   损失函数(重建) |   `loss += optim_args.lambda_l1 * l1_loss(image, gt_image, mask=obj_bound)` |
 |   损失函数(反射) |   `loss += optim_args.lambda_reg * torch.where(obj_bound, -(ref_obj * torch.log(ref_obj) + (1. - ref_obj) * torch.log(1. - ref_obj)), -torch.log(1. - ref_obj)).mean()` |
@@ -18,9 +19,19 @@
 |:----------:|:-------------:|
 |   渲染器(3D-GS) | gsplat  |
 |   渲染器(DR) |  gsplat |
+|   refl_strength |  初始化：1e-3 对于动态物体，1e-6其它 |
 |   最终成像 | `final_color = rendered_color[0].clone() obj_bound = camera.guidance['obj_bound'].squeeze(0) if 'obj_bound' in camera.guidance else None final_color[obj_bound] = refl_color[obj_bound] * refl_strength[obj_bound] + rendered_color[0][obj_bound] * (1 - refl_strength[obj_bound])`  |
 |   损失函数(重建) |   `loss += optim_args.lambda_l1 * l1_loss(image, gt_image, mask=obj_bound) * 11` |
 |   损失函数(反射) |   `_, refls_ndr = gaussians.get_refl if refls_ndr is not None and len(refls_ndr) > 0: refl_msk_loss = refls_ndr.mean() loss += REFL_MSK_LOSS_W * refl_msk_loss` |
+
+| Experiment   |   Exp3 |
+|:----------:|:-------------:|
+|   渲染器(3D-GS) | gsplat  |
+|   渲染器(DR) |  gsplat |
+|   refl_strength |  初始化：1e-3 对于动态物体，1e-6其它；读取时动态物体原值，非动态物体0 |
+|   最终成像 | `final_color = (1-refl_strength) * rendered_color[0] + refl_strength * refl_color`  |
+|   损失函数(重建) |   `if gaussians.include_obj and obj_bound is not None and iteration < int(0.7 * training_args.iterations): ref_mask = render_pkg['refl_strength_map'] > 1e-4 if 'refl_strength_map' in render_pkg else None if ref_mask.sum() > 0: loss += optim_args.lambda_l1 * l1_loss(image, gt_image, mask=ref_mask) ` |
+|   损失函数(反射) |   --- |
 
 ## 3. 实验结果 
 
@@ -29,3 +40,4 @@
 | No-DR  |   30000 | 27.36  | 26.67  |   --- |
 | Exp1   |   30000 |  26.40 | 25.36  |   |
 | Exp2   |   30000 | 25.48  | 24.91  |   |
+| Exp3   |   30000 | 27.30  | 25.91  |   |
