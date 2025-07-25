@@ -48,3 +48,6 @@
 | Exp2   |   30000 | 25.48  | 24.91  |  <img height="150" alt="image" src="https://github.com/user-attachments/assets/883551a1-4663-4cad-91aa-7a09c9f5ea4d" />|
 | Exp3   |   30000 | 27.30  | 25.91  |  <img height="150" alt="image" src="https://github.com/user-attachments/assets/b210acaf-327d-4b52-ad2a-1f0764977537" />|
 
+---
+
+上述实验结果与预期偏差较大，待验证以反射光方向、反射位置为变量的环境贴图方案(模型/代码阻塞)。
