@@ -6,7 +6,7 @@
 # 2. 相关视频
 ## 2.1 Waymo_121 
 
-GT值和YOLO感知结果汇总如下：
+GT值和YOLO感知结果汇总如下，其中YOLO行框上的数字代表***置信度***，Matched行框上的数字代表***IoU***：
 
 https://github.com/user-attachments/assets/d85c1ee7-2eed-4133-8d42-55bd64d3530d
 
