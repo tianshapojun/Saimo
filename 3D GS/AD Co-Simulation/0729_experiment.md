@@ -3,6 +3,11 @@
 # 1. 实验设置和结果
 实验中三维重建模块与[UniAD](https://arxiv.org/abs/2212.10156)联仿，评估其感知模块并与YOLO10进行比较，相关的实验设置和结果如下图所示。
 
+<div align=center>
+<img src="https://github.com/user-attachments/assets/de48072d-323f-4d23-b44b-b3df683b795c" width="1000px">
+</div>
+
+
 # 2. 相关视频
 ## 2.1 Waymo_121 
 
