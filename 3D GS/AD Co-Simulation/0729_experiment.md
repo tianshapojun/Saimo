@@ -4,8 +4,19 @@
 实验中三维重建模块与[UniAD](https://arxiv.org/abs/2212.10156)联仿，评估其感知模块并与YOLO10进行比较，相关的实验设置和结果如下图所示。
 
 <div align=center>
-<img src="https://github.com/user-attachments/assets/985536a2-8342-4acb-b3aa-a38e1ad2f281" width="1000px">
+<img src="https://github.com/user-attachments/assets/57ad0ca1-4398-4f54-8bd2-e3d552dec6b8" width="1000px">
 </div>
+
+
+| Scene   | # Frames  |   TP |   FP |    FN |    Recall(↑) |   OTA_IoU(↑) | Other |
+|:----------|:----------|:------|:--------|:--------|:--------|:--------|:--------|
+| 121   | 48 |   105 |  425   |  22 | 0.827 | 0.648 | 以左右平移修复
+| 049   | 18 |   30  |  137   |  29 | 0.508 | 0.451 | 以nuscenes配置为修复
+| 002   | 20 |   61  |  10    |  2  | 0.968 | 0.785 | 以左右平移修复
+
+** 049场景相关指标较低的原因包括GT车辆被前车遮挡、举例较远等；
+
+---
 
 
 # 2. 相关视频
