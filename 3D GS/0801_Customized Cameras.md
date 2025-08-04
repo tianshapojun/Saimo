@@ -95,4 +95,4 @@ def euler_to_rotMat(yaw, pitch, roll):
 > theta_y: **0**,   
 > theta_z: **zmin + i * (zmax - zmin) / (N + 1)**
 
-其中zmax = max{theta_z ∈ train cameras}，zmax = min{theta_z ∈ train cameras}。
+其中zmax = max{theta_z ∈ train cameras}，zmax = min{theta_z ∈ train cameras}，注意 $arctan2 \in (-pi, pi]$。
