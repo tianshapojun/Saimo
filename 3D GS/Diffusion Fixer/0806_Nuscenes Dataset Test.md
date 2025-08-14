@@ -81,8 +81,8 @@
 ---
 
 对于修复器的输入，存在下述问题：
-> a. 由于插帧以及标注本身的不正确性，产生的***颜色混乱、错误***(具体见Fig.4)；   
-> b. 由于点云的稀疏性，导致***点云图较多缺失***(具体见Fig.5)；
+> a. 由于插帧以及标注本身的不正确性，产生的***颜色混乱、错误*** (具体见Fig.4)；   
+> b. 由于点云的稀疏性，导致***点云图较多缺失*** (具体见Fig.5)；
 
 <div align=center> Fig.4 点云图染色情况对比(左：Nuscenes；右：Waymo).
   <img width="800ptx" alt="image" src="https://github.com/user-attachments/assets/874cfc13-c0a7-4d94-96fb-4d5fd538b940" /> 
@@ -114,4 +114,10 @@ u' = f'_x \frac{x \cdot cos \alpha - z \cdot sin \alpha}{x \cdot sin \alpha + z 
 v' = f'_y \frac{y}{x \cdot sin \alpha + z \cdot cos \alpha} + c'_y,
 $$
 
-通过多个原相机利用仿射变换能够获得新相机的拼接图像，
+通过多个原相机利用仿射变换能够获得新相机的拼接图像(如Fig.7)。下面罗列一些此方案存在的问题
+
+> 1. 拼接处
+
+<div align=center> Fig.7 仿射变换拼接结果.
+  <img width="900ptx" alt="image" src="https://github.com/user-attachments/assets/eac77647-fa66-4a76-98e7-43629b9a3b21" /> 
+</div>
