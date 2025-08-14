@@ -58,3 +58,9 @@
 2. 在训练集上的评估与相关文献所述差距不大；
 3. 经验证，静态背景点云***数据有误***，坐标系代码需要修改；根据现有的训练框架，类似于随机化初始点云并且点云位置远离场景范围；可以得到相应结论：***错误的初始化在重建过程中容易产生过拟合***；
 4. **解决方案**：利用[Data Preprocess](https://github.com/BigCiLeng/bilateral-driving/blob/main/docs/NuScenes.md)中的插帧数据生成方式解决Nuscenes数据集中的低频问题；
+
+
+<img width="2404" height="798" alt="image" src="https://github.com/user-attachments/assets/874cfc13-c0a7-4d94-96fb-4d5fd538b940" />
+<img width="2351" height="640" alt="image" src="https://github.com/user-attachments/assets/8f92398f-7e57-4046-8b43-e9f1fbf008da" />
+<img width="2223" height="737" alt="image" src="https://github.com/user-attachments/assets/43959bf4-270f-4b83-8e90-20e870ca1b7f" />
+
