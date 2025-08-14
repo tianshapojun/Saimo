@@ -98,3 +98,20 @@
   <img width="800ptx" alt="image" src="https://github.com/user-attachments/assets/43959bf4-270f-4b83-8e90-20e870ca1b7f" /> 
 </div>
 
+---
+
+**解决方案**
+
+对于纯粹的相机旋转(绕z轴旋转 $\alpha$)，对于原相机 $cam_{old}$和新相机 $cam_{new}$，基于仿射变换我们有下述公式：
+
+$$
+u = f_x \frac{x}{z} + c_x, 
+v = f_y \frac{y}{z} + c_y,
+$$
+
+$$
+u' = f'_x \frac{x \cdot cos \alpha - z \cdot sin \alpha}{x \cdot sin \alpha + z \cdot cos \alpha} + c'_x, 
+v' = f'_y \frac{y}{x \cdot sin \alpha + z \cdot cos \alpha} + c'_y,
+$$
+
+通过多个原相机利用仿射变换能够获得新相机的拼接图像，
