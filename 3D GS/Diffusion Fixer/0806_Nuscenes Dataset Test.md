@@ -22,15 +22,17 @@
 > Nuscenes Mini点云较Waymo更***稀疏*** (Waymo激光雷达的vFOV：top-[-17.6°,2.4°]; F,SL,SR,R-[-90°,30°])，例如前者40帧数据提取的背景点云数约***32万***，后者60帧数据提取的背景点云数约***106万***，***影响点云初始化以致训练的效果***；
 
 ---
-
 <div align=center>
+  Fig.1 Nuscenes采集车传感器安装位置示意图.
+</div>
+<div align=center> 
 <img height="220" alt="image" src="https://github.com/user-attachments/assets/d08153ff-12ec-4b8c-addb-eed5114d9616" />
-<img height="220" alt="image" src="https://github.com/user-attachments/assets/2385733a-6355-4700-bd22-09a7e84fd30f" />
+<img height="220" alt="image" src="https://github.com/user-attachments/assets/2385733a-6355-4700-bd22-09a7e84fd30f" /> 
 </div>
 
 作为比较，Waymo采集车各传感器的安装位置如下：
 
-<div align=center>
+<div align=center> Fig.2 Waymo采集车传感器安装位置示意图.
 <img height="400" alt="image" src="https://github.com/user-attachments/assets/f1e339b5-9556-4ed1-937f-a67ee066a306" />
 </div>
 
@@ -59,8 +61,40 @@
 3. 经验证，静态背景点云***数据有误***，坐标系代码需要修改；根据现有的训练框架，类似于随机化初始点云并且点云位置远离场景范围；可以得到相应结论：***错误的初始化在重建过程中容易产生过拟合***；
 4. **解决方案**：利用[Data Preprocess](https://github.com/BigCiLeng/bilateral-driving/blob/main/docs/NuScenes.md)中的插帧数据生成方式解决Nuscenes数据集中的低频问题；
 
+---
 
-<img width="2404" height="798" alt="image" src="https://github.com/user-attachments/assets/874cfc13-c0a7-4d94-96fb-4d5fd538b940" />
-<img width="2351" height="640" alt="image" src="https://github.com/user-attachments/assets/8f92398f-7e57-4046-8b43-e9f1fbf008da" />
-<img width="2223" height="737" alt="image" src="https://github.com/user-attachments/assets/43959bf4-270f-4b83-8e90-20e870ca1b7f" />
+10hz的插帧数据已构建完成，存在下述问题：
+1. 传感器数据不准确-12Hz的相机转到10Hz只能通过时间戳找对应时间的图像；
+2. 数据标注不准确-通过线性拟合bbx信息存在较大误差，结合1中的情况不确定性扩大。
+
+### 2.2 第二阶段
+在第二个阶段，我们通过[修复器](https://github.com/tianshapojun/Saimo/blob/main/3D%20GS/Diffusion%20Fixer/0527_Diffusion%20for%20Opt%20V5.md)对低质图像进行修复。根据相关算法我们需要点云渲染图作为输入，
+而Nusenes数据集的点云较为稀疏([Waymo数据集文献](https://arxiv.org/abs/1912.04838))，我们发现修复器的效果不符合预期。
+
+<div align=center>  
+  Fig.3 部分开源数据集统计信息.
+</div>
+<div align=center>  
+  <img height="300" alt="image" src="https://github.com/user-attachments/assets/49bface6-f356-4ac4-8c67-77e19d793a89" /> 
+</div>
+
+---
+
+对于修复器的输入，存在下述问题：
+> a. 由于插帧以及标注本身的不正确性，产生的***颜色混乱、错误***(具体见Fig.4)；   
+> b. 由于点云的稀疏性，导致***点云图较多缺失***(具体见Fig.5)；
+
+<div align=center> Fig.4 点云图染色情况对比(左：Nuscenes；右：Waymo).
+  <img width="800ptx" alt="image" src="https://github.com/user-attachments/assets/874cfc13-c0a7-4d94-96fb-4d5fd538b940" /> 
+</div>
+
+<div align=center> Fig.5 点云图染色情况对比(左：Nuscenes，point_scale-0.025；右：Waymo，point_scale-0.01).
+  <img width="800ptx" alt="image" src="https://github.com/user-attachments/assets/8f92398f-7e57-4046-8b43-e9f1fbf008da" /> 
+</div>
+
+由于输入的差异，修复器的效果差距较大，如Fig.6，
+
+<div align=center> Fig.6 修复器修复效果对比(左：Nuscenes；右：Waymo).
+  <img width="800ptx" alt="image" src="https://github.com/user-attachments/assets/43959bf4-270f-4b83-8e90-20e870ca1b7f" /> 
+</div>
 
