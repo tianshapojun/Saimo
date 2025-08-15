@@ -230,3 +230,10 @@ seed_torch()
 from google.colab import files
 files.download("/content/output.zip")
 ```
+
+# CV 
+## 深度/距离转颜色
+```python
+colors = cv2.applyColorMap(cv2.convertScaleAbs(dist, alpha=1), cv2.COLORMAP_JET)
+pcd.colors = o3d.utility.Vector3dVector(colors[:,0,:].clip(0, 255)/255)
+```
