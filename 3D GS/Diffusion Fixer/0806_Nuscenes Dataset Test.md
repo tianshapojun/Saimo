@@ -108,6 +108,16 @@
 
 **解决方案**
 
+<div align=center> Fig.7 方案设计变更.
+  <img width="900ptx" alt="image" src="https://github.com/user-attachments/assets/903b9a60-3916-4210-8648-7e1458dfb8f9" />   
+</div>
+
+---
+
+变更的模块如上图(Fig.7)红框内容，对于图像修复器增加了仿射变换的选项。
+
+**相关原理**
+
 对于纯粹的相机旋转(绕z轴旋转 $\alpha$)，对于原相机 $cam_{old}$和新相机 $cam_{new}$，基于仿射变换我们有下述公式：
 
 $$
@@ -120,12 +130,12 @@ u' = f'_x \frac{x \cdot cos \alpha - z \cdot sin \alpha}{x \cdot sin \alpha + z 
 v' = f'_y \frac{y}{x \cdot sin \alpha + z \cdot cos \alpha} + c'_y,
 $$
 
-通过多个原相机利用仿射变换能够获得新相机的拼接图像(如Fig.7)。下面罗列一些此方案存在的问题
+通过多个原相机利用仿射变换能够获得新相机的拼接图像(如Fig.8)。下面罗列一些此方案存在的问题
 
 > 1. 拼接处两路原相机呈像不一致，由于采集车相机并不是在同一位置+标定误差，***泛化性不足***；
 > 2. 存在mask即多路原相机都没有观察到的情况；
 
-<div align=center> Fig.7 仿射变换拼接结果.
+<div align=center> Fig.8 仿射变换拼接结果.
   <img width="900ptx" alt="image" src="https://github.com/user-attachments/assets/eac77647-fa66-4a76-98e7-43629b9a3b21" /> 
 </div>
 
