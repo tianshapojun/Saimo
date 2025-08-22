@@ -36,10 +36,16 @@
 
 实验结果如下： 
 | Experiment    | FID(↓)    | 
+|:--------------|:----------|
 | No fixer      | 119.50    | 
-| No fixer      | 119.50    |
-| No fixer      | 119.50    |
-| No fixer      | 119.50    |
-| No fixer      | 119.50    |
-| No fixer      | 119.50    |
-| No fixer      | 119.50    |
+| Exp 1         | 109.49    |
+| Exp 2         | 106.05    |
+| Exp 3         | 118.42    |
+| Exp 4         | 108.57    |
+| Exp 5         | 115.61    |
+| Exp 6         | 121.85    |
+
+相关视频如下： 
+
+https://github.com/user-attachments/assets/284d9be3-b2b6-4798-b6ac-e33c104d2009
+
