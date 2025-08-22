@@ -8,5 +8,5 @@
 
 ## 1. 方案设计
 <div align=center> Fig.1 方案设计
-  <img width="900ptx" alt="image" src="https://github.com/user-attachments/assets/ac205fb1-9c77-4f38-b218-2c066273f8cb" />   
+  <img width="900ptx" alt="image" src="https://github.com/user-attachments/assets/bab0fa35-5c23-44f9-a2df-85b30b9bb46e" />   
 </div>
