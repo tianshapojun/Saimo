@@ -20,13 +20,13 @@
 
 对于训练参数调优，包含：
 
-| Name                   |      Detail             | 
-|:-----------------------|:------------------------|
-|lambda_l1               |重建L1损失权重            | 
-|lambda_novel            |修复图像损失权重          |
-|lambda_novel_l1         |修复图像重建L1损失权重     |
-|densification_interval  |高斯点稠密化周期          |
-|opacity_reset_interval  |不透明度重置周期          |
-|lambda_depth_lidar      |雷达深度损失权重          |
-|densify_grad_threshold  |稠密化梯度阈值            |
+| Name                   |      Detail             |  Exp 1  |  Exp 2  |  Exp 3  |  Exp 4  |  Exp 5  |  Exp 6  
+|:-----------------------|:------------------------|:--------|:--------|:--------|:--------|:--------|:--------|
+|lambda_l1               |重建L1损失权重            | 10      |  5      |  10     |  10     |  10     |  10     |
+|lambda_novel            |修复图像损失权重          |  1      |  2      |  1      |  1      |  1      |  0.1    |
+|lambda_novel_l1         |修复图像重建L1损失权重     | 0.1     | 0.1     |  1     |  1       |  10     |  10     |
+|densification_interval  |高斯点稠密化周期          | 200     |  200    |  300    |  100    |  300    |  100    |
+|opacity_reset_interval  |不透明度重置周期          | 3000    | 3000    |  900    |  900    |  900    |  900    |
+|lambda_depth_lidar      |雷达深度损失权重          | 0.05    |  0.01   | 0.01    |  0.01   |  0.01   |  0.01   |
+|densify_grad_threshold  |稠密化梯度阈值            | 0.001   |  0.001  | 0.001   |  0.0006 |  0.0006 |  0.0006 |
 
