@@ -145,6 +145,11 @@
 
 ---
 
+### 2.3 时间分析 
+如前[实验报告](https://github.com/tianshapojun/Saimo/blob/main/3D%20GS/Diffusion%20Fixer/0521_Diffusion%20for%20Opt%20V4.md)所述，streetcrafter修复器输出80张图片耗时约22分钟，当前修复器耗时约1分钟。
+
+修复效率提升***2100%***。
+
 ## 3. 总结与未来方案
 > **目前阶段，在特定样本集上，pix2pix一步去噪修复器的训练以及推理结果满足基本需求，和文献方案相比也是有竞争力的；**
 
