@@ -1,0 +1,320 @@
+1. script/colmap_waymo_full.py
+本地colmap输出
+
+2. video_diffusion/vwm/modules/encoders/modules.py
+(本地下载上传) 264行 version = "/root/Codes/street_crafter-main/video_diffusion/ckpts/open_clip_pytorch_model.bin"
+
+3. street_crafter-main/street_gaussian/utils/novel_view_utils.py
+(waymo_novel_view_cameras) 更改主车轨迹
+
+4. street_gaussian/config/config.py
+cfg.gpus = [2] 更改gpu
+
+5. configs/waymo_val_121.yaml
+data: cameras 更改摄像头
+
+6. street_gaussian/utils/cfg_utils.py 
+cfg.trained_model_dir = os.path.join(cfg.model_path, 'trained_model')
+更改模型所在位置
+
+7. street_gaussian/utils/diffusion_utils.py
+(未实现) run函数，一次生成多视角
+
+8. colmap and run command
+colmap feature_extractor --ImageReader.mask_path D:/Data/streetcrafter/waymo/waymo_val_049/colmap/mask --ImageReader.camera_model SIMPLE_PINHOLE  --ImageReader.single_camera_per_folder 1 --database_path D:/Data/streetcrafter/waymo/waymo_val_049/colmap/database.db --image_path D:/Data/streetcrafter/waymo/waymo_val_049/colmap/train_imgs 
+
+colmap exhaustive_matcher --database_path D:/Data/streetcrafter/waymo/waymo_val_049/colmap/database.db
+
+colmap point_triangulator --database_path D:/Data/streetcrafter/waymo/waymo_val_049/colmap/database.db --image_path D:/Data/streetcrafter/waymo/waymo_val_049/colmap/train_imgs --input_path D:/Data/streetcrafter/waymo/waymo_val_049/colmap/created/sparse/model --output_path D:/Data/streetcrafter/waymo/waymo_val_049/colmap/triangulated/sparse/model --Mapper.ba_refine_focal_length 0 --Mapper.ba_refine_principal_point 0 --Mapper.max_extra_param 0 --clear_points 0 --Mapper.ba_global_max_num_iterations 30 --Mapper.filter_max_reproj_error 4 --Mapper.filter_min_tri_angle 0.5 --Mapper.tri_min_angle 0.5 --Mapper.tri_ignore_two_view_tracks 1 --Mapper.tri_complete_max_reproj_error 4 --Mapper.tri_continue_max_angle_error 4
+
+python train.py --config configs/waymo_val_049.yaml
+python render.py --config configs/waymo_val_049.yaml mode diffusion
+python render.py --config configs/waymo_val_049.yaml mode novel_view
+python render.py --config configs/waymo_val_049.yaml mode trajectory
+
+9. street_gaussian/models/street_gaussian_renderer.py
+123行  elif pc.include_sky_cubemap:
+替换为 elif pc.include_cube_map:
+
+10. street_gaussian/models/street_gaussian_model.py 
+function: parse_camera
+修改环境车轨迹
+
+11. street_gaussian/datasets/waymo_readers.py 
+(总体)更改内外参
+(novel view)更改内外参，street_crafter-main/street_gaussian/utils/novel_view_utils.py
+# # 0618 <
+# if cam == 0: 
+#     ext = np.array(
+#         [[ 5.68477868e-03,-5.63666773e-03,9.99967955e-01,1.70079119e+00],
+#         [-9.99983517e-01,-8.37115272e-04,5.68014846e-03,1.59456324e-02],
+#         [ 8.05071338e-04,-9.99983763e-01,-5.64133364e-03,1.51095764e+00],
+#         [ 0.00000000e+00,0.00000000e+00,0.00000000e+00,1.00000000e+00]]
+#         )
+# elif cam == 1:
+#     ext = np.array(
+#         [[ 8.20758348e-01,-3.41436671e-04,5.71275430e-01,1.52387798e+00],
+#         [-5.71271601e-01,3.21950185e-03,8.20754770e-01,4.94631337e-01],
+#         [-2.11945808e-03,-9.99994759e-01,2.44737995e-03,1.50932822e+00],
+#         [ 0.00000000e+00,0.00000000e+00,0.00000000e+00,1.00000000e+00]]
+#         )
+# elif cam == 2: 
+#     ext = np.array(
+#         [[-8.32929563e-01,-9.94603768e-06,5.53379023e-01,1.55084775e+00],
+#         [-5.53304927e-01,1.63788158e-02,-8.32817742e-01,-4.93404796e-01],
+#         [-9.05540984e-03,-9.99865858e-01,-1.36479031e-02,1.49574801e+00],
+#         [ 0.00000000e+00,0.00000000e+00,0.00000000e+00,1.00000000e+00]]
+#         )
+# c2w = ego_pose @ ext
+# RT = affine_inverse(c2w)
+# R = RT[:3, :3].T
+# T = RT[:3, 3]
+
+# width, height = 1600, 900 
+# ixt = np.array([[1.25281310e+03, 0.00000000e+00, 8.26588115e+02],
+#     [0.00000000e+00, 1.25281310e+03, 4.69984663e+02],
+#     [0.00000000e+00, 0.00000000e+00, 1.00000000e+00]])
+# fx, fy = ixt[0, 0], ixt[1, 1]
+# FovY = focal2fov(fy, height)
+# FovX = focal2fov(fx, width)
+# metadata['extrinsic'] = ext
+
+# novel_view_camera = novel_view_camera._replace(
+#     image_name=novel_view_image_name,  R=R, T=T, 
+#     FovY=FovY, FovX=FovX, K=ixt,
+#     width=width, height=height,
+#     guidance=dict(), metadata=metadata)
+# # 0618 >
+
+12. 修复器
+平移修复器：792,528
+参数变换修复器：1600，896
+trained_model_gs: 90000-平移，90000+参数改变
+
+13. dr模型训练结果
+from default codes
+a. 0715, 3 cameras，30000 steps，base(b)+refl(b), train：25.34， test：24.13
+b. 0716, 3 cameras, 30000 steps，base(a)+refl(b), train：27.78， test：25.86
+c. 0716, 3 cameras, 30000 steps, base(a),         train: 26.32,  test: 26.32
+from own codes 
+b. PSNR 26.75, SSIM: 0.81; 
+c. PSNR 26.94, SSIM: 0.81;  
+
+14. shpere intersection 
+street_gaussian/utils/graphics_utils.py
+
+15. 训练nuscenes数据集
+a. data_processor/waymo_processor/waymo_helpers.py
+load_camera_info 改摄像头数
+
+16. 0812 train history
+_1 [0,99]
+_2 [0,59] 
+    sh_degree 3
+    opacity_reset_interval 900
+    position_lr_init_obj 1.6e-04
+    extent 20
+_3 [81,120]
+FID: 113.93
+FID: 160.52
+PSNR：21.42
+SSIM：0.64
+
+17. 0813 train history 
+_2 
+    loss_l1:10 
+    FID: 89.77
+    FID: 123.24
+    PSNR：25.22
+    SSIM：0.78
+_3 
+    loss_l1:1
+    densification_interval: 50
+    position_lr_init: 1.6e-05
+
+18. 0820 train history
+_1  
+    loss_l1:5 
+_2  
+    loss_l1:10 
+    lambda_depth_lidar: 0.05
+_3  
+    loss_l1:10 
+    lambda_depth_lidar: 0.05
+    lambda_novel:1
+    densification_interval: 200
+    densify_grad_threshold_bkgd: 0.001
+    densify_grad_threshold_obj: 0.001
+_4  
+    loss_l1:5 
+    lambda_depth_lidar: 0.01
+    lambda_novel:2
+    densification_interval: 200
+    densify_grad_threshold_bkgd: 0.001
+    densify_grad_threshold_obj: 0.001
+
+19. 0821 train history 
+_1  
+    selected_frames: [81, 100]
+    lambda_l1: 10.0
+    lambda_novel: 1.0
+    lambda_novel_l1: 10.0
+    should_sample_novel_view = True
+    densify_grad_threshold_bkgd: 0.001
+    densify_grad_threshold_obj: 0.001
+_2  
+    lambda_l1: 10.0
+    lambda_novel: 1.0
+    lambda_novel_l1: 1.0
+    densification_interval: 300
+    opacity_reset_interval: 900
+    densify_grad_threshold_bkgd: 0.001
+    densify_grad_threshold_obj: 0.001
+_3  
+    lambda_l1: 10.0
+    lambda_novel: 1.0
+    lambda_novel_l1: 1.0
+    densification_interval: 100
+    opacity_reset_interval: 900
+    should_sample_novel_view = True
+_4  
+    lambda_l1: 10.0
+    lambda_novel: 1.0
+    lambda_novel_l1: 10.0
+    densification_interval: 300
+    opacity_reset_interval: 900
+    no preprocess tensor
+    fixer from 1001
+_5  
+    lambda_l1: 10.0
+    lambda_novel: 0.1
+    lambda_novel_l1: 10.0
+    densification_interval: 100
+    opacity_reset_interval: 900
+    no preprocess tensor   
+
+20. 0822 train history 
+_1  
+    lambda_l1: 10.0
+    lambda_novel: 1.
+    lambda_novel_l1: 10.0
+    densification_interval: 200
+    opacity_reset_interval: 1500
+    no preprocess tensor 
+    fixer from 1001
+    after fixer, no train cameras
+_2  
+    lambda_l1: 1.
+    lambda_novel: 1.
+    lambda_novel_l1: 10.0
+    densification_interval: 200
+    opacity_reset_interval: 1500
+    densify_grad_threshold_bkgd: 0.001
+    densify_grad_threshold_obj: 0.001
+    no preprocess tensor 
+    fixer from 1001
+    
+21. 0912_2
++车道损失
+lambda_novel_l1: 0.5
+novel_view_prob: 0.4
+split_train: 1
+lambda_l1: 2.0
+
+FID：118.033
+
+0912_1
+split_train: -1
+novel_view_prob: 0.2
+lambda_l1: 2.0
+lambda_novel_l1: 0.1
+FID：122.784
+
+22. 
+0916_1
++车道损失
+lambda_novel_l1: 0.5
+novel_view_prob: 0.2
+split_train: 1
+lambda_l1: 2.0
+lambda_novel: 0.5
+FID：117.88043085337227
+
+0916_2
++车道损失
++侧面概率
+lambda_novel_l1: 0.5
+novel_view_prob: 0.2
+split_train: 1
+lambda_l1: 2.0
+FID：125.98663797302453
+
+23.
+1015_1 分为10部分，每部分独立
+1015_2 分为10部分，第一部分01/第二部分012/第三部分123，...，第9部分789/第10部分89；
+1015_3 分为4部分，第一部分0/第二部分01/第三部分012/第四部分0123；
+1015_4 原训练框架
+
+24. 
+地面损失python代码：
+with torch.no_grad():
+    xyz2 = ((xyz3 @ w2c[0, :3, :3].T + w2c[0, :3, 3]) @ K[0].T)
+    xyz2[:, :2] = xyz2[:, :2] / xyz2[:, 2:3]
+    ground_mask = camera.guidance['ground_mask'].to(xyz3, non_blocking=True).bool()
+    xyz_mask = torch.zeros(xyz3.shape[0], dtype=torch.bool, device=xyz3.device)
+    in_image = (xyz2[:,0] >0) & (xyz2[:,0] < camera.image_width) & (xyz2[:,1] > 0) & (xyz2[:,1] < camera.image_height) & (xyz2[:,2] > 0)
+    xyz_mask[in_image] = ground_mask[0,xyz2[in_image][:,1].int(),xyz2[in_image][:,0].int()]
+del in_image, xyz2, ground_mask
+torch.cuda.empty_cache()
+# 1024, ground_plane_loss, from https://github.com/hyzhou404/HUGSIM/blob/main/train_ground.py
+c_points = (xyz3 @ w2c[0, :3, :3].T + w2c[0, :3, 3])[xyz_mask]
+biases = -cfg.ground_plane.min + cfg.ground_plane.range * torch.rand(cfg.ground_plane.n_sample, device='cuda')
+ground_loss = torch.mean(torch.abs(quaternion_to_axis_angle(quats[xyz_mask])[:,:2]))
+ground_loss += torch.mean(torch.abs(scale[:,2][xyz_mask]))
+for bias in biases:
+    mask = (bias < c_points[:, 2]) & (c_points[:, 2] < (bias + cfg.ground_plane.grid_len))
+    if torch.sum(mask) <= 1:
+        continue
+    ys = c_points[mask, 1]
+    ground_loss += torch.std(ys)/ cfg.ground_plane.n_sample
+
+1027_1 lambda_ground_new: 10.0
+1027_2 lambda_ground_new: 1000.0
+1和2存在问题，损失应包含scale，实际写成了z坐标，于29日训练1027_6和1027_7(新,lambda_ground_old)
+
+1027_3 lambda_ground: 0.0
+
+1027_4 lambda_ground_plane_old: 1000.0
+1027_5 lambda_ground_plane_old: 10.0
+4和5配置如下
+    n_sample: 10
+    grid_len: 1 #0.2
+    min: -4 #-2
+    range: 6 #4
+
+(旧)1027_6 lambda_ground_plane: 1000.0
+(旧)1027_7 lambda_ground_plane: 10.0
+6和7配置如下
+    n_sample: 10
+    grid_len: 0.2 #0.2
+    min: -4 #-2
+    range: 4 #4
+*** 结果相差不大，删去，即为6/7(旧)，6/7(新)为debug后的ground损失
+
+1027_8 lambda_ground_plane_new: 10.0
+1027_9 lambda_ground_plane_new: 1000.0
+8和9配置如下
+    n_sample: 10
+    grid_len: 2 #0.2
+    min: -4 #-2
+    range: 10 #4
+1027_10 lambda_ground_plane_new: 1000.0
+10配置如下
+    n_sample: 10
+    grid_len: 2 #0.2
+    min: -4 #-2
+    range: 10 #4
+    n_sample: 5
+    grid_len: 10 #0.2
+    min: -4 #-2
+    range: 25 #4
