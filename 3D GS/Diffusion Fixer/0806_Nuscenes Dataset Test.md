@@ -1,4 +1,4 @@
-# [Nuscenes](https://www.nuscenes.org/) 数据集标准化视角三维重建验证(nuscenes to waymo)
+# [Nuscenes](https://www.nuscenes.org/) 数据集标准化视角三维重建验证 (Nuscenes2Waymo)
 3.1项目中，子课题包括通过Nuscenes数据集(6路环视)验证标准化视角(Waymo，5路前视)的流程链路。
 
 和之前的试验相比，主要的区别在于：
